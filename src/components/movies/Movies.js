@@ -14,13 +14,13 @@ export default class Movies extends Component {
             return <Spinner />;
           } else {
             return (
-              <React.Fragment> 
+              <React.Fragment>
                 <div className="main-area">
                   <h3 className="centered">Popular now</h3>
                   <div id="movie" className="cards">
-                  {movie_list.map(item => (
-                    <Movie key={item.id} movie={item} />
-                  ))}
+                    {movie_list.map(item => (
+                      <Movie key={item.id} movie={item} />
+                    ))}
                   </div>
                 </div>
               </React.Fragment>
