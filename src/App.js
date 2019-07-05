@@ -14,7 +14,7 @@ function App() {
     <Provider>
       <Router>
         <React.Fragment>
-          <Navbar/>
+          <Navbar />
           <div className="">
             <Switch>
               <Route exact path="/" component={Index} />

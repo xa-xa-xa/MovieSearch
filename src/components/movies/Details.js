@@ -22,7 +22,6 @@ export default class Details extends Component {
         }?api_key=${process.env.REACT_APP_MS_KEY}&language=${language}`
       )
       .then(res => {
-        console.log(res.data);
         this.setState({ details: res.data });
         return axios.get(
           `https://api.themoviedb.org/3/movie/${
@@ -31,7 +30,6 @@ export default class Details extends Component {
         );
       })
       .then(res => {
-        console.log(res.data.cast);
         this.setState({ cast: res.data.cast });
       })
       .catch(err => console.err(err));
@@ -69,23 +67,21 @@ export default class Details extends Component {
                   <Li>
                     Cast:
                     <Cast>
-                      {cast.map(i => {
-                        while (i.order < 8)
-                          return (
-                            <Profile key={i.id}>
-                              <Portrait
-                                src={`https://image.tmdb.org/t/p/w300/${
-                                  i.profile_path
-                                }`}
-                              />
-                              <Name>{i.name}</Name>
-                            </Profile>
-                          );
-                      })}
+                      {cast
+                        .filter(i => i.order < 8)
+                        .map(i => (
+                          <Profile key={i.id}>
+                            <Portrait
+                              src={`https://image.tmdb.org/t/p/w300/${
+                                i.profile_path
+                              }`}
+                            />
+                            <Name>{i.name}</Name>
+                          </Profile>
+                        ))}
                     </Cast>
                   </Li>
                   <Li>IMDB-ID: {details.imdb_id}</Li>
-
                   <Li>
                     <div>Original language: {details.original_language}</div>
                   </Li>
@@ -94,14 +90,17 @@ export default class Details extends Component {
                     <div>
                       Company:{" "}
                       {details.production_companies.map(i =>
-                        i.logo_path === null ?
-                        <span  key={i.id}>{i.name}</span>
-                        :
-                        <CompanyLogo
-                          key={i.id}
-                          src={`https://image.tmdb.org/t/p/w300/${i.logo_path}`}
-                          alt={i.name}
-                        />
+                        i.logo_path === null ? (
+                          <span key={i.id}>{i.name}</span>
+                        ) : (
+                          <CompanyLogo
+                            key={i.id}
+                            src={`https://image.tmdb.org/t/p/w300/${
+                              i.logo_path
+                            }`}
+                            alt={i.name}
+                          />
+                        )
                       )}
                     </div>
                   </Li>
@@ -189,7 +188,7 @@ const Content = s.div`
   flex-direction: row;
 `;
 
-const CompanyLogo =s.img`
+const CompanyLogo = s.img`
   height: 1.5em;
   width: auto;
   display: inLine-block;
