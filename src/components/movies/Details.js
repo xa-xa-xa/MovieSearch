@@ -1,12 +1,14 @@
-import React, { Component } from "react";
-import axios from "axios";
-import Spinner from "../layout/Spinner";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import axios from 'axios';
+import Spinner from '../layout/Spinner';
+import { Link } from 'react-router-dom';
 
-import styled from "styled-components";
+import styled from 'styled-components';
+// import movie from './Movie';
+import Movie from './Movie';
 
 const s = styled;
-const language = "en-US";
+const language = 'en-US';
 
 export default class Details extends Component {
   state = {
@@ -15,6 +17,8 @@ export default class Details extends Component {
   };
 
   componentDidMount() {
+    const { type } = Movie;
+    console.log(type);
     axios
       .get(
         `https://api.themoviedb.org/3/movie/${
@@ -32,16 +36,16 @@ export default class Details extends Component {
       .then(res => {
         this.setState({ cast: res.data.cast });
       })
-      .catch(err => console.err(err));
+      .catch(err => console.log(err));
   }
 
   render() {
     const { details, cast } = this.state;
     const backgroundStyle = {
       backgroundImage:
-        "url(https://image.tmdb.org/t/p/w600_and_h900_bestv2/" +
+        'url(https://image.tmdb.org/t/p/w600_and_h900_bestv2/' +
         details.backdrop_path +
-        ")"
+        ')'
     };
 
     if (
@@ -59,10 +63,10 @@ export default class Details extends Component {
             <Content>
               <DetailsSection>
                 <Title>{details.original_title}</Title>
-                <h6 className="release-date">
+                <h6 className='release-date'>
                   release date : {details.release_date}
                 </h6>
-                <p className="card-text">{details.overview}</p>
+                <p className='card-text'>{details.overview}</p>
                 <Ul>
                   <Li>
                     Cast:
@@ -88,7 +92,7 @@ export default class Details extends Component {
                   <Li />
                   <Li>
                     <div>
-                      Company:{" "}
+                      Company:{' '}
                       {details.production_companies.map(i =>
                         i.logo_path === null ? (
                           <span key={i.id}>{i.name}</span>
@@ -105,7 +109,7 @@ export default class Details extends Component {
                     </div>
                   </Li>
                 </Ul>
-                <Link to={`/`} className="back">
+                <Link to={`/`} className='back'>
                   Go back
                 </Link>
               </DetailsSection>
@@ -114,7 +118,7 @@ export default class Details extends Component {
                   src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${
                     details.poster_path
                   }`}
-                  alt="poster"
+                  alt='poster'
                 />
               </ImageSection>
             </Content>
@@ -184,6 +188,7 @@ const Title = s.h2`
 
 const Content = s.div`
   // border: 2px soLid red;
+  top: 4em;
   display: flex;
   flex-direction: row;
 `;

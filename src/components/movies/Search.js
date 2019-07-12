@@ -1,20 +1,17 @@
-import React, { Component } from "react";
-import { Consumer } from "../../context";
+import React, { Component } from 'react';
+import { Consumer } from '../../context';
 
-// import styled from "styled-components";
-import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
-import styles from "./searchStyles.module.css";
+import styles from './searchStyles.module.scss';
 
-// const s = styled;
-const baseUrl = `https://cors-anywhere.herokuapp.com/https://api.themoviedb.org/3/`;
+const baseUrl = `https://api.themoviedb.org/3/`;
 
 export default class Search extends Component {
   state = {
-    movieTitle: "",
-    header: ""
+    movieTitle: ''
   };
   search = (dispatch, e) => {
     e.preventDefault();
@@ -28,10 +25,15 @@ export default class Search extends Component {
         }&page=1&include_adult=false`
       )
       .then(res => {
-        dispatch({ type: "SEARCH_MOVIE", payload: res.data.results });
-        this.setState({ movieTitle: "" });
-        // this.setState();
+        dispatch({
+          type: 'SEARCH_MOVIE',
+          payload: {
+            data: res.data.results,
+            query: this.state.movieTitle
+          }
+        });
       })
+
       .catch(err => console.error(err.response));
   };
 
@@ -45,28 +47,28 @@ export default class Search extends Component {
         {value => {
           const { dispatch } = value;
           return (
-            <div className="centered">
-              {" "}
+            <div className='search_button'>
+              {' '}
               <form
                 className={styles.search_box}
                 onSubmit={this.search.bind(this, dispatch)}
               >
                 <input
                   className={styles.search_text}
-                  type="text"
-                  placeholder="search for movie... actor..."
-                  name="movieTitle"
+                  type='text'
+                  placeholder='please enter movie or tv show...'
+                  name='movieTitle'
                   value={this.state.movieTitle}
                   onChange={this.onChange}
                 />
-                <a
-                  alt="search"
-                  type="submit"
-                  href="/"
+                <button
+                  alt='search'
+                  type='submit'
+                  href='/'
                   className={styles.search_btn}
                 >
                   <FontAwesomeIcon icon={faSearch} />
-                </a>
+                </button>
               </form>
             </div>
           );

@@ -4,7 +4,7 @@ import Search from "../movies/Search";
 
 export default function Index() {
   return (
-    <React.Fragment style="top: 50px">
+    <React.Fragment>
       <Search />
       <Movies />
     </React.Fragment>

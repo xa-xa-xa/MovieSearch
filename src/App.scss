@@ -1,7 +1,14 @@
 @import url("https://fonts.googleapis.com/css?family=Comfortaa|Patua+One");
+$main-background-color: hsl(0, 0%, 90%);
+$main-text-color-dark: #404040;
+$main-text-color-light: #898989;
+$navbar-background-color: #005b75;
+$card-background-color: #ffff;
+$link-color: #000;
+$text-color-teal: #007489;
 
 body {
-  background: hsl(0, 0%, 90%);
+  background: $main-background-color;
   margin: 0;
 }
 
@@ -13,7 +20,7 @@ button,
 input,
 select,
 textarea {
-  color: #404040;
+  color: $main-text-color-light;
   font-family: "Comfortaa", Arial, sans-serif;
   font-size: 18px;
   line-height: 1.5;
@@ -29,12 +36,8 @@ h6 {
   letter-spacing: 2px;
 }
 
-h2 {
-  font-size: 2rem;
-}
-
 p {
-  color: #898989;
+  color: $main-text-color-light;
 }
 
 b,
@@ -49,22 +52,24 @@ i {
   font-style: italic;
 }
 
-.masthead {
-  background-color: #005b75;
-  width: 100%;
+.centered {
+  text-align: center;
 }
 
-.masthead h2 {
-  color: white;
-  margin-block-start: 0.25em;
-  margin-block-end: 0.125em;
+.content {
+  position: relative;
+  top: 4em;
 }
 
-.masthead p,
-.masthead p a {
-  color: white;
-  margin-block-start: 0.125em;
-  margin-block-end: 0.125em;
+.nav {
+  z-index: 1;
+}
+
+.search_button {
+  display: flex;
+  position: absolute;
+  top: 100px;
+  z-index: 10;
 }
 
 img {
@@ -74,35 +79,21 @@ img {
   height: auto;
 }
 
-.centered {
-  text-align: center;
-}
-
-#search-form {
-  text-align: center;
-  margin-bottom: 1em;
-}
-
-input {
-  text-align: center;
-  width: 70vw;
-}
-
 .card {
-  background-color: #fff;
+  background-color: $card-background-color;
   margin-bottom: 1em;
   margin-top: 1em;
   height: 35em;
 }
 
 .card a {
-  color: #000;
+  color: $main-text-color-dark;
   text-decoration: none;
 }
 .card a:hover {
   text-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   transition: all 1s cubic-bezier(0.25, 0.8, 0.25, 1);
-  color: #007489;
+  color: $text-color-teal;
 }
 
 .card-content {
@@ -115,7 +106,7 @@ input {
 
 .card-content h3 {
   margin: 0;
-  color: #007489;
+  color: $text-color-teal;
   margin-bottom: 0.125em;
   font-weight: bold;
 }
@@ -209,25 +200,5 @@ input {
   .centered {
     margin: 0 auto;
     padding: 0 1em;
-  }
-}
-
-/* ********************************* */
-.spinner {
-  margin: 0 auto;
-  width: 200px;
-  height: 200px;
-  border: 10px solid;
-  border-radius: 50%;
-  border-left-color: rgb(233, 233, 233);
-  border-top-color: #aaa;
-  border-right-color: #555;
-  border-bottom-color: #000;
-  animation: spin 500ms infinite linear;
-}
-
-@keyframes spin {
-  100% {
-    transform: rotate(360deg);
   }
 }

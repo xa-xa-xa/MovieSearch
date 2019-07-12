@@ -1,0 +1,49 @@
+$navbar-background-color: #005b75;
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  background-color: $navbar-background-color;
+
+  h1,
+  p {
+    color: white;
+    margin-left: 0.5rem;
+    height: auto;
+    margin-block-start: 0;
+    margin-block-end: 0;
+  }
+}
+
+@media screen and (max-width: 40em) {
+  .navbar {
+    height: 3em;
+    .branding {
+      p {
+        display: none;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 40em) {
+  .navbar {
+    height: 4em;
+    .branding {
+      max-width: 50%;
+      font-size: 80%;
+    }
+  }
+}
+
+@media screen and (min-width: 50em) {
+  .navbar {
+    .branding {
+      font-size: 100%;
+    }
+  }
+}

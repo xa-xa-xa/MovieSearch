@@ -1,28 +1,30 @@
-import React, { Component } from "react";
-import axios from "axios";
+import React, { Component } from 'react';
+import axios from 'axios';
 
 const Context = React.createContext();
 const reducer = (state, action) => {
   switch (action.type) {
-    case "SEARCH_MOVIE":
+    case 'SEARCH_MOVIE':
       return {
         ...state,
-        movie_list: action.payload,
-        heading: "Search Results"
+        query_results: action.payload.data,
+        heading: 'Search results for: ',
+        query: action.payload.query
       };
     default:
       return state;
   }
 };
 
-const baseUrl = "https://api.themoviedb.org/3/";
-let lang = "en-US";
+const baseUrl = 'https://api.themoviedb.org/3/';
+let lang = 'en-US';
 
 export class Provider extends Component {
   state = {
     language: lang,
-    movie_list: [],
-    heading: "Top 10 Movies",
+    query_results: [],
+    heading: 'Top 20 Movies',
+    query: '',
     dispatch: action => this.setState(state => reducer(state, action))
   };
 
@@ -34,7 +36,7 @@ export class Provider extends Component {
         }&language=${this.state.language}&page=1`
       )
       .then(result => {
-        this.setState({ movie_list: result.data.results });
+        this.setState({ query_results: result.data.results });
       })
       .catch(err => console.error(err.response));
   }
