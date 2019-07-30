@@ -6,9 +6,6 @@ import { Link } from 'react-router-dom';
 import styles from './detailsStyles.module.scss';
 import DetailsCard from './DetailsCard';
 
-// import movie from './Movie';
-// import Movie from './Movie';
-
 const language = 'en-US';
 
 export default class Details extends Component {

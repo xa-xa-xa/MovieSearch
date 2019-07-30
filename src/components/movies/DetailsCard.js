@@ -3,10 +3,13 @@ import styles from './detailsCardStyles.module.scss';
 import { Link } from 'react-router-dom';
 
 export default function DetailsCard(mediaType, details, cast) {
-  console.log('mediaType: ', mediaType, details);
+  console.log('cast: ', cast);
+  // console.log('mediaType: ', mediaType, details);
 
   switch (mediaType) {
+    // Persons details card
     case 'person':
+      console.log(details);
       return (
         <React.Fragment>
           <div className={styles.container}>
@@ -18,50 +21,32 @@ export default function DetailsCard(mediaType, details, cast) {
                   <span className={styles.category}>IMDB-ID:</span>{' '}
                   {details.imdb_id}
                 </li>
-                <li className='release-date'>
+                <li>
                   <span className={styles.category}>Birthday:</span>{' '}
                   {details.birthday}
                 </li>
                 <li>
-                  <div>
-                    <span className={styles.category}>Place of birth:</span>{' '}
-                    {details.place_of_birth}
-                  </div>
+                  <span className={styles.category}>Place of birth:</span>{' '}
+                  {details.place_of_birth}
                 </li>
                 <li>
-                  <div>
-                    <span className={styles.category}>
-                      Production countries:{' '}
-                    </span>
-                  </div>
+                  {details.deathday !== null
+                    ? `Date of death: ${details.deathday}`
+                    : ``}
+                </li>
+                <li>
+                  <span className={styles.category}>
+                    {details.homepage ? (
+                      <span>
+                        Personal Website:
+                        <a href={details.homepage}>{details.homepage}</a>
+                      </span>
+                    ) : (
+                      ''
+                    )}
+                  </span>
                 </li>
                 <li />
-                <li>
-                  <div className={styles.companies}>
-                    <span className={styles.category}> Company: </span>
-                  </div>
-                </li>
-                <li>
-                  <div className={styles.cast}>
-                    <span className={styles.category}>Cast:</span>
-                    {cast
-                      .filter(i => i.order < 8)
-                      .map(i => (
-                        <div className={styles.profile} key={i.id}>
-                          <img
-                            className={styles.portrait}
-                            src={`https://image.tmdb.org/t/p/w300/${
-                              i.profile_path
-                            }`}
-                            alt={i.name}
-                          />
-                          <a className={styles.name} href='/'>
-                            {i.name}
-                          </a>
-                        </div>
-                      ))}
-                  </div>
-                </li>
               </ul>
             </div>
             <div className={styles.poster_section}>
@@ -138,12 +123,12 @@ export default function DetailsCard(mediaType, details, cast) {
                   </div>
                 </li>
                 <li>
-                  <div className={styles.cast}>
+                  <ul className={styles.cast}>
                     <span className={styles.category}>Cast:</span>
                     {cast
                       .filter(i => i.order < 8)
                       .map(i => (
-                        <div className={styles.profile} key={i.id}>
+                        <li className={styles.profile} key={i.id}>
                           <img
                             className={styles.portrait}
                             src={`https://image.tmdb.org/t/p/w300/${
@@ -154,9 +139,9 @@ export default function DetailsCard(mediaType, details, cast) {
                           <a className={styles.name} href='/'>
                             {i.name}
                           </a>
-                        </div>
+                        </li>
                       ))}
-                  </div>
+                  </ul>
                 </li>
               </ul>
             </div>
@@ -222,30 +207,7 @@ export default function DetailsCard(mediaType, details, cast) {
                     )}
                   </div>
                 </li>
-                <li>
-                  <div className={styles.cast}>
-                    <span className={styles.category}>Cast:</span>
-                    {cast
-                      .filter(i => i.order < 8)
-                      .map(i => (
-                        <div className={styles.profile} key={i.id}>
-                          <img
-                            className={styles.portrait}
-                            src={`https://image.tmdb.org/t/p/w300/${
-                              i.profile_path
-                            }`}
-                            alt={i.name}
-                          />
-                          <Link
-                            to={`/overview/person/${i.id}`}
-                            className='details'
-                          >
-                            {i.name}
-                          </Link>
-                        </div>
-                      ))}
-                  </div>
-                </li>
+                <li />
               </ul>
             </div>
             <div className={styles.poster_section}>
@@ -256,6 +218,22 @@ export default function DetailsCard(mediaType, details, cast) {
                 }`}
                 alt='poster'
               />
+            </div>
+            <div className={styles.cast}>
+              {cast
+                .filter(i => i.order < 8)
+                .map(i => (
+                  <li className={styles.profile} key={i.id}>
+                    <img
+                      className={styles.portrait}
+                      src={`https://image.tmdb.org/t/p/w300/${i.profile_path}`}
+                      alt={i.name}
+                    />
+                    <Link to={`/overview/person/${i.id}`} className='details'>
+                      {i.name}
+                    </Link>
+                  </li>
+                ))}
             </div>
           </div>
         </React.Fragment>
