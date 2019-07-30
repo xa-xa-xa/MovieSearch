@@ -71,10 +71,11 @@
   .profile {
     display: flex;
     flex-direction: column;
-    margin-left: 0.75rem;
+    margin-left: 0.5rem;
     width: 3.5rem;
     img {
       width: 100%;
+      border-radius: 10px 0 10px;
     }
     a {
       color: lighten($secondary-text, 20%);

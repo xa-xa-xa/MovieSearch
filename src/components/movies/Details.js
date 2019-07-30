@@ -37,6 +37,13 @@ export default class Details extends Component {
       .catch(err => console.log(err));
   }
 
+  prevProps = this.props.location;
+  componentDidUpdate(prevProps) {
+    if (this.props.location !== prevProps.location) {
+      this.componentDidMount();
+    }
+  }
+
   render() {
     const { details, cast } = this.state;
     const backdropImage = {

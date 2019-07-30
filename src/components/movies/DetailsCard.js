@@ -9,7 +9,7 @@ export default function DetailsCard(mediaType, details, cast) {
   switch (mediaType) {
     // Persons details card
     case 'person':
-      console.log(details);
+      // console.log(details);
       return (
         <React.Fragment>
           <div className={styles.container}>
@@ -224,12 +224,15 @@ export default function DetailsCard(mediaType, details, cast) {
                 .filter(i => i.order < 8)
                 .map(i => (
                   <li className={styles.profile} key={i.id}>
-                    <img
-                      className={styles.portrait}
-                      src={`https://image.tmdb.org/t/p/w300/${i.profile_path}`}
-                      alt={i.name}
-                    />
                     <Link to={`/overview/person/${i.id}`} className='details'>
+                      <img
+                        className={styles.portrait}
+                        src={`https://image.tmdb.org/t/p/w300/${
+                          i.profile_path
+                        }`}
+                        alt={i.name}
+                      />
+
                       {i.name}
                     </Link>
                   </li>
