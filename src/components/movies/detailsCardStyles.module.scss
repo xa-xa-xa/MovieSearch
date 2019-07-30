@@ -1,0 +1,75 @@
+@import '../../App.scss';
+
+.container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  width: 100%;
+}
+
+.details_section {
+  padding: 1rem;
+  width: 65vw;
+  h2,
+  p,
+  ul,
+  a {
+    color: $card-text-color;
+  }
+  h2 {
+    font-size: 4rem;
+  }
+  p {
+    display: block;
+    font-size: 2vw;
+  }
+  ul {
+    .company_logo {
+    }
+    li {
+      list-style-type: none;
+      margin-bottom: 0.5em;
+      font-size: 1.5vw;
+    }
+  }
+  .companies {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    .company_logo {
+      width: auto;
+      margin-left: 2rem;
+      margin-bottom: 2rem;
+      max-height: 70px;
+    }
+  }
+  .cast {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-around;
+    .profile {
+      display: flex;
+      border: 1px red dashed;
+      flex-direction: column;
+      width: 60px;
+      height: 100px;
+      .portrait {
+        object-fit: contain;
+      }
+      a {
+        text-align: center;
+        font-size: 70%;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.poster_section {
+  flex-grow: 35vw;
+  .poster {
+    width: 100%;
+  }
+}

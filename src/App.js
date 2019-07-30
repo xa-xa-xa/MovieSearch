@@ -18,7 +18,11 @@ function App() {
           <div className='content'>
             <Switch>
               <Route exact path='/' component={Index} />
-              <Route exact path='/overview/movie/:id' component={Details} />
+              <Route
+                exact
+                path='/overview/:mediaType/:id'
+                component={Details}
+              />
             </Switch>
           </div>
         </React.Fragment>

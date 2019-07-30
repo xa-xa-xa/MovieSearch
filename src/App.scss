@@ -1,12 +1,34 @@
-@import url("https://fonts.googleapis.com/css?family=Comfortaa|Patua+One");
+@import url('https://fonts.googleapis.com/css?family=Comfortaa|Patua+One');
 $main-background-color: hsl(0, 0%, 90%);
-$main-text-color-dark: #404040;
-$main-text-color-light: #898989;
-$navbar-background-color: #005b75;
-$card-background-color: #ffff;
+$main-text-color-dark: #2e2d2d;
+$main-text-color-light: #eee4e4;
+$navbar-background-color: #d7eff5;
+$card-background-color: rgb(255, 255, 255);
 $link-color: #000;
 $text-color-teal: #007489;
 
+$primary-color: rgb(0, 91, 155);
+$secondary-color: rgb(255, 132, 0);
+$show-home-image: true;
+$home-image: url('/images/bcg-unsplash.jpg');
+$background-opacity: 0.9;
+
+// Animation Mixin
+@mixin easeOut {
+  transition: all 0.5s ease-out;
+}
+
+// Set Text Color
+@function set-text-color($color) {
+  @if (lightness($color) > 40) {
+    @return $main-text-color-dark;
+  } @else {
+    @return $main-text-color-light;
+  }
+}
+
+$card-text-color: set-text-color($card-background-color);
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++
 body {
   background: $main-background-color;
   margin: 0;
@@ -21,7 +43,7 @@ input,
 select,
 textarea {
   color: $main-text-color-light;
-  font-family: "Comfortaa", Arial, sans-serif;
+  font-family: 'Comfortaa', Arial, sans-serif;
   font-size: 18px;
   line-height: 1.5;
 }
@@ -32,7 +54,7 @@ h4,
 h5,
 h6 {
   clear: both;
-  font-family: "Patua One", serif;
+  font-family: 'Patua One', serif;
   letter-spacing: 2px;
 }
 
@@ -72,112 +94,52 @@ i {
   z-index: 10;
 }
 
-img {
-  display: block;
-  border: 0;
-  width: 100%;
-  height: auto;
-}
-
 .card {
   background-color: $card-background-color;
-  margin-bottom: 1em;
-  margin-top: 1em;
-  height: 35em;
-}
-
-.card a {
-  color: $main-text-color-dark;
-  text-decoration: none;
-}
-.card a:hover {
-  text-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-  transition: all 1s cubic-bezier(0.25, 0.8, 0.25, 1);
-  color: $text-color-teal;
-}
-
-.card-content {
-  display: flex;
-  padding: 1.4rem 1.4rem 0 1.4rem;
-  flex-direction: column;
-  height: calc(100% - 1.4rem);
-  margin-bottom: auto;
-}
-
-.card-content h3 {
-  margin: 0;
-  color: $text-color-teal;
-  margin-bottom: 0.125em;
-  font-weight: bold;
-}
-
-.card-content h6 {
-  margin: 0;
-  font-weight: 600;
-  letter-spacing: 0;
-}
-
-.card-content p {
-  font-size: 80%;
-  flex-grow: 1;
-  overflow: hidden;
-}
-
-.card-content > .details {
-  text-align: right;
-  margin-bottom: 1vh;
+  border-radius: 20px;
+  border: 1px solid lighten($card-text-color, 50%);
+  &:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    transition: all 1s cubic-bezier(0.25, 0.8, 0.25, 1);
+    color: $text-color-teal;
+  }
 }
 
 /* +++++++++ flexbox +++++++++ */
 .cards {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   justify-content: space-evenly;
   margin-top: 50px;
 }
 
-/* .card {
-  flex: 1 0 500px;
+.card {
+  // flex: 1 0 500px;
   box-sizing: border-box;
-  margin: 1rem .25em;
-} */
+  margin: 1rem 0.25em;
+  max-width: 20vw;
+  flex: 0 0 400px;
+}
 
 @media screen and (max-width: 40em) {
-  .masthead h2 {
-    font-size: 1.5em;
-    margin-block-start: 0.25em;
-    margin-block-end: 0.125em;
-  }
-  .masthead p,
-  .masthead p a {
-    display: none;
-  }
-  .cards {
-    color: red;
-    margin: 0.5em 1vw;
-  }
-  .card-content {
-    padding: 0 0 1vh 0;
-  }
-  .card-content:not(img) {
-    padding-left: 3vw;
-    padding-right: 3vw;
-  }
-  .card-content:not(.card-text) {
-    text-align: center;
-  }
 }
 
 .details-card {
   width: 50%;
 }
 
-@media screen and (min-width: 40em) {
+// Mobile
+@media screen and (max-width: 35em) {
+  .card {
+    max-width: calc(100vw - 4vw);
+  }
+}
+@media screen and (min-width: 35em) {
   .centered {
     max-width: 52em;
   }
   .card {
-    color: orange;
     max-width: calc(50vw - 4vw);
   }
 }
@@ -187,13 +149,10 @@ img {
     max-width: 52em;
   }
   .card {
-    color: blueviolet;
     max-width: calc(33vw - 3vw);
   }
   @media screen and (min-width: 65em) {
     .card {
-      color: green;
-      max-width: calc(24vw - 1.5vw);
     }
   }
 

@@ -1,3 +1,39 @@
+@import '../../App.scss';
+
 .card_text {
+  color: $card-text-color;
   margin-bottom: 0;
+}
+
+.card_content {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 1.4rem);
+  border-radius: 20px 20px 0 0;
+  overflow: hidden;
+  position: relative;
+  top: -1px;
+  .image img {
+    position: relative;
+    top: calc(-1rem + 1px);
+    width: 100%;
+  }
+  & :not(.image img) {
+    padding: 1rem;
+  }
+  .title {
+    margin: 0;
+    color: $text-color-teal;
+    margin-bottom: 1em;
+  }
+  h6 {
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+  p {
+    font-size: 80%;
+    flex-grow: 1;
+    overflow: hidden;
+  }
 }

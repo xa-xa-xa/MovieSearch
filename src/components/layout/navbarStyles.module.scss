@@ -1,4 +1,4 @@
-$navbar-background-color: #005b75;
+@import '../../App.scss';
 
 .navbar {
   display: flex;
@@ -7,11 +7,11 @@ $navbar-background-color: #005b75;
   position: fixed;
   width: 100%;
   top: 0;
-  background-color: $navbar-background-color;
+  background-color: $main-background-color;
 
   h1,
   p {
-    color: white;
+    color: set-text-color($navbar-background-color);
     margin-left: 0.5rem;
     height: auto;
     margin-block-start: 0;

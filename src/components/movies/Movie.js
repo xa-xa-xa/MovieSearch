@@ -56,7 +56,7 @@ export default function Movie(props) {
         case 'person':
           item.type = 'person';
           item.title = Item.name;
-          if (Item.kno)
+          if (Item.known_for)
             item.overview = `Known for: ${Item.known_for.map(
               i => `
             \n ${i.original_title || i.original_name} (${i.release_date})`
@@ -80,22 +80,25 @@ export default function Movie(props) {
   const { title, released, icon, overview, poster, portrait, type } = item;
 
   return (
-    <article className='card'>
-      <div className='card-content'>
-        <picture>
-          <img className='thumbnail' src={poster || portrait} alt={title} />
-        </picture>
-        <h3 className='movie-title'>{` ${title}`}</h3>
+    <Link to={`/overview/${type}/${Item.id}`}>
+      <article className='card'>
+        <div className={styles.card_content}>
+          <div className={styles.image}>
+            <img
+              className={styles.card_poster}
+              src={poster || portrait}
+              alt={title}
+            />
+          </div>
+          <h3 className={styles.title}>{` ${title}`}</h3>
 
-        <h6 className='release-date'>
-          <FontAwesomeIcon icon={icon} /> {released}
-        </h6>
-        <p className={styles.card_text}>{overview}</p>
-        <Link to={`/overview/${type}/${Item.id}`} className='details'>
-          More details...
-        </Link>
-      </div>
-    </article>
+          <h6 className={styles.release_date}>
+            <FontAwesomeIcon icon={icon} /> {released}
+          </h6>
+          <p className={styles.card_text}>{overview}</p>
+        </div>
+      </article>
+    </Link>
   );
 }
 

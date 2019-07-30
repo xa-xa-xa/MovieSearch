@@ -1,43 +1,18 @@
+@import '../../App.scss';
+
 .backdrop {
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;
+  opacity: 0.1;
+  filter: blur(3px);
 }
 
 .details_card {
-}
-
-.content {
-}
-
-.details_section {
-}
-
-.title {
-}
-
-ul {
-}
-
-li {
-}
-.cast {
-}
-
-.profile {
-}
-
-.portrait {
-}
-
-.name {
-}
-
-.company_logo {
-}
-
-.back_btn {
-}
-
-.image_section {
-}
-
-.poster {
+  width: 100vw;
+  height: 100%;
 }
