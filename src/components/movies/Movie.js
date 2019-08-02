@@ -80,9 +80,9 @@ export default function Movie(props) {
   const { title, released, icon, overview, poster, portrait, type } = item;
 
   return (
-    <Link to={`/overview/${type}/${Item.id}`}>
-      <article className='card'>
-        <div className={styles.card_content}>
+    <article className='card'>
+      <div className={styles.card_content}>
+        <Link to={`/overview/${type}/${Item.id}`}>
           <div className={styles.image}>
             <img
               className={styles.card_poster}
@@ -90,15 +90,16 @@ export default function Movie(props) {
               alt={title}
             />
           </div>
+        </Link>
+        <Link to={`/overview/${type}/${Item.id}`}>
           <h3 className={styles.title}>{` ${title}`}</h3>
-
-          <h6 className={styles.release_date}>
-            <FontAwesomeIcon icon={icon} /> {released}
-          </h6>
-          <p className={styles.card_text}>{overview}</p>
-        </div>
-      </article>
-    </Link>
+        </Link>
+        <h6 className={styles.release_date}>
+          <FontAwesomeIcon icon={icon} /> {released}
+        </h6>
+        <p className={styles.card_text}>{overview}</p>
+      </div>
+    </article>
   );
 }
 

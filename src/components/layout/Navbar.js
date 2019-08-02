@@ -1,5 +1,5 @@
-import React from "react";
-import styles from "./navbarStyles.module.scss";
+import React from 'react';
+import styles from './navbarStyles.module.scss';
 
 export default function Navbar() {
   return (

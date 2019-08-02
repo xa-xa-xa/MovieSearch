@@ -3,7 +3,6 @@ import styles from './detailsCardStyles.module.scss';
 import { Link } from 'react-router-dom';
 
 export default function DetailsCard(mediaType, details, cast) {
-  console.log('cast: ', cast);
   // console.log('mediaType: ', mediaType, details);
 
   switch (mediaType) {

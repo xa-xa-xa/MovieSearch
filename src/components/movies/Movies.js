@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Consumer } from '../../context';
 import Movie from '../movies/Movie';
 import Spinner from '../layout/Spinner';
+import styles from './movie.module.scss';
 
 export default class Movies extends Component {
   render() {
@@ -16,7 +17,7 @@ export default class Movies extends Component {
             return (
               <React.Fragment>
                 <div>
-                  <h3 className='centered'>
+                  <h3 className={styles.header}>
                     {heading}
                     {searchResult}
                   </h3>

@@ -1,4 +1,7 @@
 @import '../../App.scss';
+a {
+  text-decoration: none;
+}
 
 .card_text {
   color: $card-text-color;
@@ -13,25 +16,36 @@
   overflow: hidden;
   position: relative;
   top: -1px;
-  .image img {
+  div {
     position: relative;
-    top: calc(-1rem + 1px);
-    width: 100%;
+    top: calc(-0.25rem + 1px);
+    height: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    img {
+      width: 100%;
+      border-radius: 15px 15px 0 0;
+    }
   }
-  & :not(.image img) {
+  & :not(img, i) {
     padding: 1rem;
   }
   .title {
     margin: 0;
     color: $secondary-text;
-    margin-bottom: 1em;
+  }
+  h1 {
+    margin-bottom: 0.25rem;
   }
   h6 {
+    color: lighten($secondary-text, 20%);
     margin: 0;
     font-weight: 600;
     letter-spacing: 0;
   }
   p {
+    color: lighten($secondary-text, 10%);
+
     font-size: 80%;
     flex-grow: 1;
     overflow: hidden;
