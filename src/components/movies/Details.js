@@ -10,7 +10,9 @@ const language = 'en-US';
 export default class Details extends Component {
   state = {
     details: {},
-    cast: {}
+    cast: {},
+    ID: {},
+    MediaType: {}
   };
   prevId = '';
   prevType = '';
@@ -23,7 +25,7 @@ export default class Details extends Component {
         }&language=${language}`
       )
       .then(res => {
-        this.setState({ details: res.data });
+        this.setState({ details: res.data, ID: id, MediaType: mediaType });
         return axios.get(
           `https://api.themoviedb.org/3/${mediaType}/${id}/credits?api_key=${
             process.env.REACT_APP_MS_KEY
@@ -36,25 +38,24 @@ export default class Details extends Component {
       .catch(err => console.log('ERROR from .catch():', err));
   }
 
+  // console.log('this.props: ', this.props.location);
+  // console.log('this.state: ', this.state.ID, this.state.MediaType);
+
   async componentDidMount() {
     const { mediaType, id } = this.props.match.params;
     this.fetchData(mediaType, id);
   }
 
-  prevProps = this.props.location;
+  prevProps = this.props; // mounted props
 
   componentDidUpdate(prevProps) {
-    if (this.props.location !== prevProps.location) {
-      this.setState({
-        id: this.props.match.params.id,
-        mediaType: this.props.match.params.mediaType
-      });
+    if (prevProps.location !== this.props.location) {
       this.componentDidMount();
     }
   }
 
   render() {
-    const { details = [], cast = [] } = this.state;
+    const { details = [], cast = [], MediaType } = this.state;
     let backdropImage;
     details.backdrop_path
       ? (backdropImage = {
@@ -76,7 +77,7 @@ export default class Details extends Component {
         <React.Fragment>
           <div className={styles.backdrop} style={backdropImage} />
           <div className={styles.details_card}>
-            {DetailsCard(this.props.match.params.mediaType, details, cast)}
+            {DetailsCard(MediaType, details, cast)}
           </div>
         </React.Fragment>
       );
