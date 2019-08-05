@@ -38,9 +38,6 @@ export default class Details extends Component {
       .catch(err => console.log('ERROR from .catch():', err));
   }
 
-  // console.log('this.props: ', this.props.location);
-  // console.log('this.state: ', this.state.ID, this.state.MediaType);
-
   async componentDidMount() {
     const { mediaType, id } = this.props.match.params;
     this.fetchData(mediaType, id);

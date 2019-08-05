@@ -8,12 +8,21 @@ export default function DetailsCard(mediaType, details, cast) {
   switch (mediaType) {
     // Persons details card
     case 'person':
-      // console.log(details);
+      console.log(details);
       return (
         <React.Fragment>
           <div className={styles.container}>
+            <div className={styles.poster_section}>
+              <img
+                className={styles.poster}
+                src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${
+                  details.profile_path
+                }`}
+                alt='poster'
+              />
+            </div>
             <div className={styles.details_section}>
-              <h2>{details.original_name}</h2>
+              <h2>{details.name}</h2>
               <p className={`card-text ${styles.text}`}>{details.biography}</p>
               <ul>
                 <li>
@@ -48,15 +57,6 @@ export default function DetailsCard(mediaType, details, cast) {
                 <li />
               </ul>
             </div>
-            <div className={styles.poster_section}>
-              <img
-                className={styles.poster}
-                src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${
-                  details.profile_path
-                }`}
-                alt='poster'
-              />
-            </div>
           </div>
         </React.Fragment>
       );
@@ -65,6 +65,15 @@ export default function DetailsCard(mediaType, details, cast) {
       return (
         <React.Fragment>
           <div className={styles.container}>
+            <div className={styles.poster_section}>
+              <img
+                className={styles.poster}
+                src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${
+                  details.poster_path
+                }`}
+                alt='poster'
+              />
+            </div>
             <div className={styles.details_section}>
               <h2>{details.original_name}</h2>
               <p className={`card-text ${styles.text}`}>{details.overview}</p>
@@ -144,6 +153,15 @@ export default function DetailsCard(mediaType, details, cast) {
                 </li>
               </ul>
             </div>
+          </div>
+        </React.Fragment>
+      );
+    default:
+      // DEFAULT: Movie type
+      return (
+        <React.Fragment>
+          <div className={styles.container}>
+            {' '}
             <div className={styles.poster_section}>
               <img
                 className={styles.poster}
@@ -153,14 +171,6 @@ export default function DetailsCard(mediaType, details, cast) {
                 alt='poster'
               />
             </div>
-          </div>
-        </React.Fragment>
-      );
-    default:
-      // Movie type
-      return (
-        <React.Fragment>
-          <div className={styles.container}>
             <div className={styles.details_section}>
               <h2>{details.original_title}</h2>
               <p>{details.overview}</p>
@@ -208,15 +218,6 @@ export default function DetailsCard(mediaType, details, cast) {
                 </li>
                 <li />
               </ul>
-            </div>
-            <div className={styles.poster_section}>
-              <img
-                className={styles.poster}
-                src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${
-                  details.poster_path
-                }`}
-                alt='poster'
-              />
             </div>
             <div className={styles.cast}>
               {cast
