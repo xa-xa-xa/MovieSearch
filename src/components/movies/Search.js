@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Consumer } from '../../context';
+import { Redirect } from 'react-router';
 
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,7 +12,8 @@ const baseUrl = `https://api.themoviedb.org/3/`;
 
 export default class Search extends Component {
   state = {
-    movieTitle: ''
+    movieTitle: '',
+    redirect: false
   };
   search = (dispatch, e) => {
     e.preventDefault();
@@ -26,14 +28,16 @@ export default class Search extends Component {
       )
       .then(res => {
         dispatch({
-          type: 'SEARCH_MOVIE',
+          type: 'SEARCH',
           payload: {
             data: res.data.results,
             query: this.state.movieTitle
           }
         });
       })
-
+      .then(() => {
+        this.setState({ redirect: true });
+      })
       .catch(err => console.error(err.response));
   };
 
@@ -41,7 +45,19 @@ export default class Search extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  prevProps = this.props; // mounted props
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.location !== this.props.location) {
+      this.componentDidMount();
+    }
+  }
+
   render() {
+    const { redirect } = this.state;
+    if (redirect === true) {
+      return <Redirect to='/' />;
+    }
     return (
       <Consumer>
         {value => {
@@ -56,7 +72,7 @@ export default class Search extends Component {
                 <input
                   className={styles.search_text}
                   type='text'
-                  placeholder='please enter movie or tv show...'
+                  placeholder='enter movie, show, or name'
                   name='movieTitle'
                   value={this.state.movieTitle}
                   onChange={this.onChange}

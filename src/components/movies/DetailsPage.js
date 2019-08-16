@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Spinner from '../layout/Spinner';
 
-import styles from './detailsStyles.module.scss';
+import styles from './detailsPageStyles.module.scss';
 import DetailsCard from './DetailsCard';
 
 const language = 'en-US';
 
-export default class Details extends Component {
+export default class DetailsPage extends Component {
   state = {
     details: {},
     cast: {},

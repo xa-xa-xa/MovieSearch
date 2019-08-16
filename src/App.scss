@@ -2,16 +2,17 @@
 $main-background-color: hsl(0, 0%, 90%);
 $main-text-color-dark: #2e2d2d;
 $main-text-color-light: #eee4e4;
-$navbar-background-color: #d7eff5;
 $card-background-color: rgb(255, 255, 255);
 $link-color: #000;
-$secondary-text: #323435;
+$secondary-text: #285f7a;
 
 $primary-color: rgb(0, 91, 155);
 $secondary-color: rgb(255, 132, 0);
 $show-home-image: true;
 $home-image: url('/images/bcg-unsplash.jpg');
 $background-opacity: 0.9;
+
+$navbar-background-color: $secondary-color;
 
 // Animation Mixin
 @mixin easeOut {
@@ -79,8 +80,6 @@ i {
 }
 
 .content {
-  position: relative;
-  top: 4em;
   h3 {
     color: lighten(set-text-color($navbar-background-color), 20%);
     text-align: center;

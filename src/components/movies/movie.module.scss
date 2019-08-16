@@ -50,4 +50,8 @@ a {
     flex-grow: 1;
     overflow: hidden;
   }
+  .read_more {
+    float: right;
+    color: $secondary-text;
+  }
 }

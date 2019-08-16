@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Navbar from './components/layout/Navbar';
 import Index from './components/layout/Index';
-import Details from './components/movies/Details';
+import DetailsPage from './components/movies/DetailsPage';
+import Search from './components/movies/Search';
 
 import { Provider } from './context';
 
@@ -15,13 +16,14 @@ function App() {
       <Router>
         <React.Fragment>
           <Navbar />
+          <Search />
           <div className='content'>
             <Switch>
               <Route exact path='/' component={Index} />
               <Route
                 exact
                 path='/overview/:mediaType/:id'
-                component={Details}
+                component={DetailsPage}
               />
             </Switch>
           </div>

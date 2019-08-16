@@ -5,7 +5,8 @@ import {
   faFilm,
   faTv,
   faStar,
-  faCalendarAlt
+  faCalendarAlt,
+  faShare
 } from '@fortawesome/free-solid-svg-icons';
 import styles from './movie.module.scss';
 
@@ -98,6 +99,11 @@ export default function Movie(props) {
           <FontAwesomeIcon icon={icon} /> {released}
         </h6>
         <p className={styles.card_text}>{overview}</p>
+        <Link to={`/overview/${type}/${Item.id}`}>
+          <span className={styles.read_more}>
+            read more <FontAwesomeIcon icon={faShare} />
+          </span>
+        </Link>
       </div>
     </article>
   );
