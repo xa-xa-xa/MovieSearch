@@ -106,7 +106,7 @@
 
 @media screen and (min-width: 40em) {
   .navbar {
-    height: 4em;
+    height: $navbar-height;
     .branding {
       max-width: 50%;
       font-size: 80%;

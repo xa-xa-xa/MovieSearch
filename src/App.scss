@@ -13,6 +13,7 @@ $home-image: url('/images/bcg-unsplash.jpg');
 $background-opacity: 0.9;
 
 $navbar-background-color: $secondary-color;
+$navbar-height: 4rem;
 
 // Animation Mixin
 @mixin easeOut {
@@ -129,7 +130,7 @@ i {
 // Mobile
 @media screen and (max-width: 35em) {
   .card {
-    max-width: calc(100vw - 4em);
+    max-width: calc(100vw - 1em);
   }
 }
 // Tablet

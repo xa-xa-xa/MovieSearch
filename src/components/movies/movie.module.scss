@@ -40,8 +40,10 @@ a {
   h6 {
     color: lighten($secondary-text, 20%);
     margin: 0;
+    margin-top: 0.5rem;
     font-weight: 600;
     letter-spacing: 0;
+    text-align: center;
   }
   p {
     color: lighten($secondary-text, 10%);

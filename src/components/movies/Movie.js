@@ -11,6 +11,7 @@ import {
 import styles from './movie.module.scss';
 
 // import styles from "./movie.module.scss";
+const no_poster = '/images/poster_not_available.png';
 
 export default function Movie(props) {
   const { Item } = props;
@@ -19,11 +20,11 @@ export default function Movie(props) {
       ? short(Item.overview, 130)
       : 'Sorry, at this time no description available...',
     poster: !Item.poster_path
-      ? '/images/poster_not_available.png'
+      ? no_poster
       : `https://image.tmdb.org/t/p/w500/${Item.poster_path}`,
     portrait: Item.profile_path
       ? `https://image.tmdb.org/t/p/w500/${Item.profile_path}`
-      : '/images/poster_not_available.png'
+      : no_poster
   };
 
   let item = {};
