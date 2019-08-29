@@ -20,15 +20,13 @@ export default function DetailsCard(mediaType, details, cast) {
             <section className={styles.poster_section}>
               <img
                 className={styles.poster}
-                src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${
-                  details.profile_path
-                }`}
+                src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${details.profile_path}`}
                 alt='poster'
               />
             </section>
             <section className={styles.details_section}>
               <h2>{details.name}</h2>
-              <p className={`card-text ${styles.text}`}>{details.biography}</p>
+              <p className={styles.text}>{details.biography}</p>
               <ul>
                 <li>
                   <span className={styles.category}>IMDB-ID:</span>{' '}
@@ -82,16 +80,14 @@ export default function DetailsCard(mediaType, details, cast) {
             <section className={styles.poster_section}>
               <img
                 className={styles.poster}
-                src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${
-                  details.poster_path
-                }`}
+                src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${details.poster_path}`}
                 alt='poster'
               />
             </section>
 
             <section className={styles.details_section}>
               <h2>{details.original_name}</h2>
-              <p className={`card-text ${styles.text}`}>{details.overview}</p>
+              <p className={styles.text}>{details.overview}</p>
               <ul>
                 <li className='release-date'>
                   <span className={styles.category}>Air time:</span>{' '}
@@ -172,9 +168,7 @@ export default function DetailsCard(mediaType, details, cast) {
                         className={styles.portrait}
                         src={
                           i.profile_path
-                            ? `https://image.tmdb.org/t/p/w300/${
-                                i.profile_path
-                              }`
+                            ? `https://image.tmdb.org/t/p/w300/${i.profile_path}`
                             : no_image
                         }
                         alt={i.name}
@@ -198,15 +192,13 @@ export default function DetailsCard(mediaType, details, cast) {
             <section className={styles.poster_section}>
               <img
                 className={styles.poster}
-                src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${
-                  details.poster_path
-                }`}
+                src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${details.poster_path}`}
                 alt='poster'
               />
             </section>
             <section className={styles.details_section}>
               <h2>{details.original_title}</h2>
-              <p className={`card-text ${styles.text}`}>{details.overview}</p>
+              <p className={styles.text}>{details.overview}</p>
               <ul>
                 <li>
                   <span className={styles.category}>IMDB-ID:</span>{' '}
@@ -262,9 +254,7 @@ export default function DetailsCard(mediaType, details, cast) {
                         className={styles.portrait}
                         src={
                           i.profile_path
-                            ? `https://image.tmdb.org/t/p/w300/${
-                                i.profile_path
-                              }`
+                            ? `https://image.tmdb.org/t/p/w300/${i.profile_path}`
                             : no_image
                         }
                         alt={i.name}
