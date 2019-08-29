@@ -5,7 +5,7 @@ li {
 
 .container {
   position: absolute;
-  h2 {
+  height: calc h2 {
     margin-block-start: 0.5rem;
     margin-block-end: 0;
     text-align: center;
@@ -16,6 +16,9 @@ li {
   ul,
   a {
     color: $main-text-color-dark;
+  }
+  .details_seciton {
+    height: auto;
   }
   .cast {
     display: flex;
@@ -49,158 +52,32 @@ li {
       }
     }
   }
+  ul {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3rem;
+    li .companies {
+      height: 2rem;
+    }
+  }
   .companies {
+    object-fit: contain;
     display: flex;
     flex-wrap: wrap;
-    height: 2rem;
+
     img {
+      position: relative;
       margin: 0.5rem;
-      height: 100%;
-      top: 0.5rem;
+      max-height: 100%;
+      top: -0.5rem;
     }
   }
 
   img {
     max-width: 100%;
   }
-  //   flex-direction: row;
-  //   flex-wrap: wrap;
-
-  //   & section {
-  //     box-sizing: content-box;
-  //     & p {
-  //       color: black;
-  //     }
-  //     &.details_section {
-  //       width: 70%;
-  //       display: flex;
-  //       flex-direction: column;
-  //       padding: 0 1rem;
-  //       h2,
-  //       p,
-  //       ul,
-  //       a {
-  //         color: $card-text-color;
-  //       }
-  //       h2 {
-  //         font-size: 3rem;
-  //         margin-bottom: 0.5rem;
-  //         margin-block-start: 0em;
-  //         margin-block-end: 0em;
-  //       }
-  //       p {
-  //         display: block;
-  //         font-size: 1rem;
-  //         color: $card-text-color;
-  //       }
-  //       ul {
-  //         li {
-  //           margin-bottom: 0.5em;
-  //           font-size: 1rem;
-  //           color: $card-text-color;
-  //           .category {
-  //             color: $secondary-text;
-  //           }
-  //           & .season {
-  //             display: inline;
-  //           }
-  //         }
-  //       }
-  //       .companies {
-  //         display: flex;
-  //         flex-direction: row;
-  //         flex-wrap: wrap;
-  //         justify-content: flex-start;
-  //         .company_logo {
-  //           width: auto;
-  //           margin-left: 2rem;
-  //           height: 1.5rem;
-  //         }
-  //       }
-  //     }
-
-  //     &.poster_section {
-  //       display: flex;
-  //       position: relative;
-  //       margin-left: 1rem;
-  //       margin-bottom: auto;
-  //       margin-top: auto;
-  //       max-width: 25vw;
-  //       // align-items: flex-start;
-  //       justify-items: center;
-  //       max-height: 60vh;
-  //       .poster {
-  //         width: 100%;
-  //         box-shadow: 15px 15px 15px rgba(0, 0, 0, 0.068);
-  //       }
-  //     }
-  //     &.overview {
-  //     }
-
-  //     &.cast {
-  //       display: flex;
-  //       flex-direction: row;
-  //       position: relative;
-  //       flex-wrap: wrap;
-  //       justify-content: space-around;
-  //       max-width: 68%;
-  //       left: 26.5%;
-  //       .profile {
-  //         display: flex;
-  //         flex-direction: column;
-  //         margin-left: 0.5rem;
-  //         margin-bottom: 0.5rem;
-  //         max-width: 4rem;
-  //         background-color: #fff;
-  //         border-radius: 5px;
-  //         box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.105);
-  //         &:hover {
-  //         }
-
-  //         img {
-  //           width: 100%;
-  //           border-radius: 5px 5px 0px 0px;
-  //         }
-  //         a {
-  //           color: set-text-color($main-background-color);
-
-  //           width: 100%;
-  //           text-align: center;
-  //           font-size: 0.7rem;
-  //           text-decoration: none;
-  //           @include easeOut;
-
-  //           &:hover {
-  //             color: $secondary-text;
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
 }
 
-// // Mobile
-// @media screen and (max-width: 35em) {
-//   .container {
-//     display: flex;
-//     flex-direction: column;
-//   }
-//   .poster_section {
-//     margin-left: auto;
-//     margin-right: auto;
-//     justify-content: center;
-//   }
-//   .details_section {
-//     max-width: 100%;
-//     margin-top: 0.5rem;
-//     padding-top: 0;
-//     margin-top: 0;
-//     h2 {
-//       font-size: 2rem;
-//       margin: 0;
-//     }
-//   }
-// }
 // Mobile
 
 @media screen and (max-width: 35em) {
@@ -248,15 +125,14 @@ li {
         width: 50%;
 
         p {
-          font-size: 0.9rem;
+          font-size: 1rem;
         }
-        ul {
-          li {
-            font-size: 0.9rem;
-          }
+        li {
+          font-size: 0.9rem;
         }
       }
       &.cast {
+        margin-top: 1rem;
         width: 100%;
         padding: 0 1rem;
         & .profile {
@@ -266,34 +142,36 @@ li {
   }
 }
 
-// // Small desktop
-// @media screen and (min-width: 50em) {
-//   .container {
-//     & .poster_section {
-//       width: 20%;
-//     }
-//     & .details_section {
-//       ul {
-//         margin-block-end: 0.5em;
-//         & .cast {
-//           & .profile {
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
 //Desktop
 @media screen and (min-width: 65em) {
   .container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
     section {
-      display: flex;
-      max-width: 65vw;
-      &.overview_section,
-      &.details_section,
+      &.poster_section {
+        width: 25%;
+        margin: 3rem 2rem;
+      }
+      &.details_section {
+        h2 {
+          font-size: 2.5rem;
+        }
+        margin-top: 3rem;
+        width: 65%;
+
+        p,
+        li {
+          font-size: 1rem;
+        }
+      }
       &.cast {
+        width: 65%;
+        // margin-top: -1rem;
         margin-left: auto;
-        max-width: 70%;
+        & .profile {
+        }
       }
     }
   }
