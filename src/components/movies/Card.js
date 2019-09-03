@@ -8,12 +8,12 @@ import {
   faCalendarAlt,
   faShare
 } from '@fortawesome/free-solid-svg-icons';
-import styles from './movie.module.scss';
+import styles from './card.module.scss';
 
 // import styles from "./movie.module.scss";
 const no_poster = '/images/poster_not_available.png';
 
-export default function Movie(props) {
+export default function Card(props) {
   const { Item } = props;
   let errors = {
     overview: Item.overview
@@ -39,9 +39,7 @@ export default function Movie(props) {
           item.released = `release date: ${Item.release_date}`;
           item.video = Item.video;
           item.poster = errors.poster;
-          item.backdrop = `https://image.tmdb.org/t/p/w500/${
-            Item.backdrop_path
-          }`;
+          item.backdrop = `https://image.tmdb.org/t/p/w500/${Item.backdrop_path}`;
           item.icon = faFilm;
           break;
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Consumer } from '../../context';
-import Movie from '../movies/Movie';
+import Card from '../movies/Card';
 import Spinner from '../layout/Spinner';
 import styles from './movies.module.scss';
 
@@ -23,7 +23,7 @@ export default class Movies extends Component {
                   </h3>
                   <div className={`cards ${styles.content}`}>
                     {query_results.map(item => (
-                      <Movie key={item.id} Item={item} />
+                      <Card key={item.id} Item={item} />
                     ))}
                   </div>
                 </div>
