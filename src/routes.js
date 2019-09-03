@@ -7,7 +7,6 @@ export const routes = props => (
   <Switch>
     <Route exact path='/' component={Index} />
     <Route exact path='/details/:type/:id' component={DetailsPage} />
-
     <Route component={Error404} />
   </Switch>
 );

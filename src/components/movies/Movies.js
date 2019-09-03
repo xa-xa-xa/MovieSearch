@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Consumer } from '../../context';
 import Movie from '../movies/Movie';
 import Spinner from '../layout/Spinner';
-import styles from './movie.module.scss';
+import styles from './movies.module.scss';
 
 export default class Movies extends Component {
   render() {
@@ -15,19 +15,19 @@ export default class Movies extends Component {
             return <Spinner />;
           } else {
             return (
-              <React.Fragment>
+              <>
                 <div>
                   <h3 className={styles.header}>
                     {heading}
-                    {searchResult}
+                    <span className={styles.query}>{searchResult}</span>
                   </h3>
-                  <div id='' className='cards'>
+                  <div className={`cards ${styles.content}`}>
                     {query_results.map(item => (
                       <Movie key={item.id} Item={item} />
                     ))}
                   </div>
                 </div>
-              </React.Fragment>
+              </>
             );
           }
         }}

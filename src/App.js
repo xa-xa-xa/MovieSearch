@@ -14,7 +14,7 @@ function App() {
   return (
     <Provider>
       <Router>
-        <React.Fragment>
+        <>
           <Navbar />
           <Search />
           <div className='content'>
@@ -27,7 +27,7 @@ function App() {
               />
             </Switch>
           </div>
-        </React.Fragment>
+        </>
       </Router>
     </Provider>
   );
