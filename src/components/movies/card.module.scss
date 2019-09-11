@@ -52,8 +52,12 @@ a {
     flex-grow: 1;
     overflow: hidden;
   }
-  .read_more {
-    float: right;
-    color: $secondary-text;
+  .actions {
+    width: 100%;
+    height: auto;
+    .read_more {
+      float: right;
+      color: $secondary-text;
+    }
   }
 }

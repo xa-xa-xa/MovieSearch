@@ -5,10 +5,13 @@ import {
   faFilm,
   faTv,
   faStar,
-  faCalendarAlt,
-  faShare
+  faCalendarAlt
 } from '@fortawesome/free-solid-svg-icons';
+
 import styles from './card.module.scss';
+import LikeIcon from '../actions/LikeIcon';
+import SaveIcon from '../actions/SaveIcon';
+// import SaveIcon from '../actions/SaveIcon';
 
 // import styles from "./movie.module.scss";
 const no_poster = '/images/poster_not_available.png';
@@ -98,11 +101,12 @@ export default function Card(props) {
           <FontAwesomeIcon icon={icon} /> {released}
         </h6>
         <p className={styles.card_text}>{overview}</p>
-        <Link to={`/overview/${type}/${Item.id}`}>
-          <span className={styles.read_more}>
-            read more <FontAwesomeIcon icon={faShare} />
-          </span>
-        </Link>
+        <div className={styles.actions}>
+          <LikeIcon likeId={Item.id} mediaType={type} /> <SaveIcon />
+          <Link to={`/overview/${type}/${Item.id}`}>
+            <span className={styles.read_more}>read more</span>
+          </Link>
+        </div>
       </div>
     </article>
   );

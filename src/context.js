@@ -22,6 +22,11 @@ let lang = 'en-US';
 export class Provider extends Component {
   state = {
     language: lang,
+    marked: {
+      liked: [],
+      saved: [],
+      shared: []
+    },
     query_results: [],
     heading: 'Top 20 Movies',
     query: '',
@@ -31,9 +36,7 @@ export class Provider extends Component {
   componentDidMount() {
     axios
       .get(
-        `${baseUrl}movie/popular?api_key=${
-          process.env.REACT_APP_MS_KEY
-        }&language=${this.state.language}&page=1`
+        `${baseUrl}movie/popular?api_key=${process.env.REACT_APP_MS_KEY}&language=${this.state.language}&page=1`
       )
       .then(result => {
         this.setState({ query_results: result.data.results });
