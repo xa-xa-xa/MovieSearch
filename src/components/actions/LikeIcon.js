@@ -2,45 +2,39 @@ import React, { useState, useEffect } from 'react';
 import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useLocalState, LocalContext } from '../services/localStorage';
 
-let LIKES = [];
+import ls from 'local-storage';
+
 const LikeIcon = props => {
-  const { likeId, likeType } = props;
-  // let likes = [];
+  const { likeId, mediaType } = props;
   const [like, setLike] = useState({
-    id: 0,
-    type: '',
-    status: false
+    id: likeId,
+    mediaType: mediaType
   });
+  const lsLike = `like_${likeId}`;
 
-  function addLikeToLocalStorage(likeStatus) {
-    if (likeStatus) {
-      if (like.id instanceof LIKES) {
-        console.log('Already in LIKES!');
-      } else {
-        LIKES.push(like);
-      }
-    }
+  const [likeStatus, setLikeStatus] = useState(
+    localStorage.hasOwnProperty(lsLike)
+  );
+  function handleClick(likeStatus) {
+    setLikeStatus(!likeStatus);
+    setLike({ id: likeId, mediaType: mediaType });
   }
 
-  function handleStatusChange(likeStatus) {
-    setLike({ id: likeId, likeType: likeType, status: !likeStatus });
+  function saveDeleteLocalStorage() {
+    likeStatus ? ls(lsLike, like) : ls.remove(lsLike);
   }
 
   useEffect(() => {
-    addLikeToLocalStorage(like.status);
-    console.log(`LIKES(${LIKES.length})`, LIKES);
-  }, [like.status]);
+    saveDeleteLocalStorage();
+  }, [likeStatus]);
 
   return (
-    <LocalContext.Provider value={[like, setLike]}>
-      <FontAwesomeIcon
-        onClick={() => handleStatusChange(like.status)}
-        icon={like.status ? faHeart : farHeart}
-        style={{ cursor: 'pointer' }}
-      />
-    </LocalContext.Provider>
+    <FontAwesomeIcon
+      onClick={() => handleClick(likeStatus)}
+      icon={likeStatus ? faHeart : farHeart}
+      style={{ cursor: 'pointer' }}
+    />
   );
 };
 

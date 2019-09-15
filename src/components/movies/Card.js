@@ -101,8 +101,9 @@ export default function Card(props) {
           <FontAwesomeIcon icon={icon} /> {released}
         </h6>
         <p className={styles.card_text}>{overview}</p>
-        <div role='actions' className={styles.actions}>
-          <LikeIcon likeId={Item.id} likeType={type} /> <SaveIcon />
+        <div className={styles.actions}>
+          <LikeIcon likeId={Item.id} mediaType={type} />{' '}
+          <SaveIcon saveId={Item.id} mediaType={type} />
           <Link to={`/overview/${type}/${Item.id}`}>
             <span className={styles.read_more}>read more</span>
           </Link>
