@@ -1,16 +1,20 @@
 @import '../../App.scss';
+*,
+html {
+  margin: 0;
+  padding: 0;
+}
 li {
   list-style-type: none;
 }
 
 .container {
-  position: absolute;
-  height: calc h2 {
-    margin-block-start: 0.5rem;
-    margin-block-end: 0;
-    text-align: center;
+  display: flex;
+  margin-top: 4rem;
+  > :last-child {
+    position: relative;
+    background-color: dodgerblue !important;
   }
-
   p,
   h2,
   ul,
@@ -23,9 +27,7 @@ li {
   .cast {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 4rem;
     margin-bottom: 7rem;
-    width: 100%;
     flex-direction: row;
     left: 0;
     justify-content: space-around;
@@ -56,6 +58,7 @@ li {
     display: flex;
     flex-direction: column;
     margin-bottom: 3rem;
+    margin-top: 1rem;
     li .companies {
       height: 2rem;
     }
@@ -75,6 +78,9 @@ li {
 
   img {
     max-width: 100%;
+  }
+  p {
+    margin-top: 1rem;
   }
 }
 
@@ -111,7 +117,6 @@ li {
 @media screen and (min-width: 35em) {
   .container {
     top: $navbar-height;
-    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 
@@ -121,8 +126,10 @@ li {
         margin: 3rem 2rem;
       }
       &.details_section {
+        background-color: rgba(255, 0, 0, 0.521);
         margin-top: 3rem;
-        width: 50%;
+        width: 55%;
+        height: 80%;
 
         p {
           font-size: 1rem;
@@ -132,9 +139,11 @@ li {
         }
       }
       &.cast {
+        background-color: rgba(0, 128, 0, 0.479);
         margin-top: 1rem;
-        width: 100%;
+        max-width: 100%;
         padding: 0 1rem;
+        width: 55%;
         & .profile {
         }
       }
@@ -145,10 +154,6 @@ li {
 //Desktop
 @media screen and (min-width: 65em) {
   .container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-
     section {
       &.poster_section {
         width: 25%;
@@ -158,18 +163,15 @@ li {
         h2 {
           font-size: 2.5rem;
         }
-        margin-top: 3rem;
-        width: 65%;
-
+        width: auto;
+        max-width: 65%;
         p,
         li {
           font-size: 1rem;
         }
       }
       &.cast {
-        width: 65%;
-        // margin-top: -1rem;
-        margin-left: auto;
+        max-width: 60%;
         & .profile {
         }
       }
