@@ -27,6 +27,7 @@ const LikeIcon = props => {
 
   useEffect(() => {
     saveDeleteLocalStorage();
+    // eslint-disable-next-line
   }, [likeStatus]);
 
   return (

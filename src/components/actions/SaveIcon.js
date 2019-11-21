@@ -29,6 +29,7 @@ const SaveIcon = props => {
 
   useEffect(() => {
     saveDeleteLocalStorage();
+    // eslint-disable-next-line
   }, [saveStatus]);
 
   return (
