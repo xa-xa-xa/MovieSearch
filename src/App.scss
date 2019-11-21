@@ -13,11 +13,28 @@ $home-image: url('/images/bcg-unsplash.jpg');
 $background-opacity: 0.9;
 
 $navbar-background-color: $secondary-color;
-$navbar-height: 4rem;
 
 // Animation Mixin
 @mixin easeOut {
   transition: all 0.5s ease-out;
+}
+
+// Set navbar height
+@mixin navbar_height($prop) {
+  #{$prop}: 2rem;
+  @media (max-width: 35em) {
+    #{$prop}: 3rem;
+  }
+  @media (min-width: 35em) {
+    #{$prop}: 4rem;
+  }
+  @media (min-width: 65em) {
+    #{$prop}: 4rem;
+  }
+}
+
+@mixin calc_container_height($prop, $expression) {
+  #{$prop}: calc(#{$expression});
 }
 
 // Set Text Color

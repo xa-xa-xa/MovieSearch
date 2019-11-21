@@ -1,103 +1,105 @@
 @import '../../App.scss';
+
 *,
-html {
+body {
   margin: 0;
   padding: 0;
+  --navbar-height: @include navbar_height('height');
 }
 li {
   list-style-type: none;
 }
 
+p {
+  margin-top: 1rem;
+}
+
+img {
+  max-width: 100%;
+}
+
 .container {
   display: flex;
-  margin-top: 4rem;
-  > :last-child {
-    position: relative;
-    background-color: dodgerblue !important;
-  }
-  p,
-  h2,
-  ul,
-  a {
-    color: $main-text-color-dark;
-  }
-  .details_seciton {
-    height: auto;
-  }
-  .cast {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 7rem;
-    flex-direction: row;
-    left: 0;
-    justify-content: space-around;
-    .profile {
-      background-color: #fff;
-      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.105);
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: relative;
+  @include navbar_height('top');
+  // @include navbar_height(height, #{'100vh - #{navbar_height}'});
+}
+p,
+h2,
+ul,
+a,
+.text {
+  color: $main-text-color-dark;
+}
+h2 {
+  text-align: center;
+}
 
-      display: flex;
-      flex-direction: column;
-      width: 75px;
-      margin: 5px;
-      border: 1px solid $main-text-color-light;
-      border-radius: 8px 8px 0 0;
-      overflow: hidden;
-      a {
-        text-align: center;
-        font-size: 0.75rem;
-        &:hover {
-          color: $primary-color;
-        }
-      }
-      img {
-        width: 100%;
-      }
-    }
+section.poster_section {
+  img {
+    box-shadow: 12px 12px 20px 1px rgba(0, 0, 0, 0.2);
   }
+  max-height: 60%;
+  margin: 3rem 2rem 0 2rem;
+}
+
+// details section
+section.details_section {
+  flex-direction: column;
+  height: fit-content;
   ul {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 3rem;
     margin-top: 1rem;
     li .companies {
-      height: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      .company_logo {
+        margin: 0.25rem 0.5rem;
+        max-height: 1.5rem;
+        top: -0.5rem;
+      }
     }
-  }
-  .companies {
-    object-fit: contain;
-    display: flex;
-    flex-wrap: wrap;
-
-    img {
-      position: relative;
-      margin: 0.5rem;
-      max-height: 100%;
-      top: -0.5rem;
+    // cast section
+    .cast {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      .profile {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        width: 75px;
+        margin: 5px;
+        background-color: #fff;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.105);
+        border: 1px solid $main-text-color-light;
+        border-radius: 8px 8px 0 0;
+        a {
+          text-align: center;
+          font-size: 0.75rem;
+          &:hover {
+            color: $primary-color;
+          }
+        }
+        img {
+          width: 100%;
+        }
+      }
     }
-  }
-
-  img {
-    max-width: 100%;
-  }
-  p {
-    margin-top: 1rem;
   }
 }
 
 // Mobile
-
 @media screen and (max-width: 35em) {
   .container {
     top: 3rem;
-    flex-direction: column;
-    background: $main-background-color;
-    color: $main-text-color-dark;
     padding: 0 0.5rem;
     section {
       margin-left: auto;
       margin-right: auto;
       &.poster_section {
-        display: flex;
         margin-top: 1rem;
         width: 80%;
         img {
@@ -109,27 +111,25 @@ li {
         h2 {
           font-size: 2.25rem;
         }
+        .cast {
+          margin-top: 1rem;
+          margin-bottom: 6rem;
+        }
       }
     }
   }
 }
+
 // Tablet
 @media screen and (min-width: 35em) {
   .container {
-    top: $navbar-height;
-    flex-direction: row;
-    flex-wrap: wrap;
-
     section {
       &.poster_section {
-        width: 35%;
-        margin: 3rem 2rem;
+        width: 30%;
       }
       &.details_section {
-        background-color: rgba(255, 0, 0, 0.521);
         margin-top: 3rem;
         width: 55%;
-        height: 80%;
 
         p {
           font-size: 1rem;
@@ -137,14 +137,11 @@ li {
         li {
           font-size: 0.9rem;
         }
-      }
-      &.cast {
-        background-color: rgba(0, 128, 0, 0.479);
-        margin-top: 1rem;
-        max-width: 100%;
-        padding: 0 1rem;
-        width: 55%;
-        & .profile {
+        .cast {
+          width: 100%;
+          & .profile {
+            width: 55px;
+          }
         }
       }
     }
@@ -157,8 +154,9 @@ li {
     section {
       &.poster_section {
         width: 25%;
-        margin: 3rem 2rem;
+        max-height: 60%;
       }
+
       &.details_section {
         h2 {
           font-size: 2.5rem;
@@ -169,10 +167,10 @@ li {
         li {
           font-size: 1rem;
         }
-      }
-      &.cast {
-        max-width: 60%;
-        & .profile {
+        .cast {
+          & .profile {
+            width: 75px;
+          }
         }
       }
     }

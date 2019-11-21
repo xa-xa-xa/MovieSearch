@@ -3,100 +3,32 @@
 // *,
 // *::before,
 // *::after {
-//   // box-sizing: border-box;
-// }
-// html,
-// body {
-//   padding: 0;
-//   margin: 0;
-// }
-// body {
-//   min-height: 100%;
-// }
-
-// /* .navbar with drop-shadow on scroll */
-// .navbar {
-//   height: 80px; /* 64 + 16px */
-//   position: sticky;
-//   top: 0; /* negative top allows for 16 pixels of movement before sticking */
-//   z-index: 1; /* make sure .navbar overlaps main*/
-//   color: white;
-//   text-align: center;
-
-//   /* PSEUDO ELEMENTS to create drop-shadow */
-//   &::before,
-//   &::after {
-//     content: '';
-//     display: block;
-//     height: 16px;
-//     /* make pseudo elements sticky as well */
-//     position: sticky;
-//   }
-//   /* SHADOW */
-//   &::before {
-//     top: 48px; /* shadow is at bottom of element, so at 48 + 16 = 64px */
-//     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
-//   }
-
-//   /* COVER */
-//   &::after {
-//     /* linear gradient from background color to transparent acts as
-//      a transition effect so the shadow appears gradually */
-//     background: linear-gradient(
-//       $main-background-color,
-//       $main-background-color 50%,
-//       $main-background-color 70%,
-//       transparent
-//     );
-//     top: 0;
-//     /* cover should fall over shadow */
-//     z-index: 2;
-//   }
-//   /* .navbar CONTENT */
-//   & div {
-//     position: absolute;
-//     background: orange;
-//     height: 40px;
-//     padding: 20px;
-//     position: sticky;
-//     top: 0px;
-//     /* compensate for shadow with negative margin */
-//     margin-top: -16px;
-//     /* content should fall over shadow and cover */
-//     z-index: 3;
-//     h1,
-//     p {
-//       position: relative;
-//       float: left;
-//       top: -22px;
-//       margin: 0;
-//     }
-//   }
-// }
 
 .navbar {
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: fixed;
-  width: 100%;
+  @include navbar_height('height');
+  width: 100vw;
   top: 0;
   background-color: $navbar-background-color;
+  box-shadow: 12px 12px 20px 1px rgba(0, 0, 0, 0.2);
 
   h1,
   p {
     color: set-text-color($navbar-background-color);
-    margin-left: 0.5rem;
+    margin-left: 1rem;
     height: auto;
     margin-block-start: 0;
     margin-block-end: 0;
   }
 }
 
-@media screen and (max-width: 40em) {
+@media screen and (max-width: 35em) {
   .navbar {
-    height: 2.5em;
     .branding {
+      text-align: center;
       p {
         display: none;
       }
@@ -104,11 +36,10 @@
   }
 }
 
-@media screen and (min-width: 40em) {
+@media screen and (min-width: 35em) {
   .navbar {
-    height: $navbar-height;
     .branding {
-      max-width: 50%;
+      max-width: 100%;
       font-size: 80%;
     }
   }

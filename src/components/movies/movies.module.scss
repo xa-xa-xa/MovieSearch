@@ -1,7 +1,7 @@
 @import '../../App.scss';
 .header {
   position: relative;
-  margin-top: $navbar-height;
+  @include navbar_height('margin-top');
 }
 
 .query {

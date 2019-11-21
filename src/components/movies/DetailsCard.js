@@ -6,63 +6,81 @@ import Spinner from '../layout/Spinner';
 const no_image = '/images/no_image.png';
 
 export default function DetailsCard(mediaType, details, cast) {
-  // console.log('mediaType: ', mediaType, details);
-
-  const noInfo = 'Sorry, no info available at this time';
+  const noInfo = ` Sorry, no info available at this time`;
+  const {
+    name,
+    biography,
+    overview,
+    place_of_birth,
+    profile_path,
+    imdb_id,
+    birthday,
+    deathday,
+    homepage,
+    original_name,
+    first_air_date,
+    status,
+    last_air_date,
+    original_language,
+    original_title,
+    release_date,
+    origin_country,
+    poster_path,
+    production_countries,
+    production_companies,
+    networks,
+    seasons
+  } = details;
 
   switch (mediaType) {
     /*
-     * Details Card A Person
+     * Details Card for A Person
      */
     case 'person':
-      console.log(mediaType);
-
       return (
         <React.Fragment>
           <div className={styles.container}>
             <section className={styles.poster_section}>
               <img
                 className={styles.poster}
-                src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${details.profile_path}`}
+                src={
+                  profile_path
+                    ? `https://image.tmdb.org/t/p/w600_and_h900_bestv2/${profile_path}`
+                    : no_image
+                }
                 alt='poster'
               />
             </section>
             <section className={styles.details_section}>
-              <h2>{details.name}</h2>
-              <p className={styles.text}>{details.biography}</p>
+              <h2>{name}</h2>
+              <p className={styles.text}>{biography}</p>
               <ul>
                 <li>
                   <span className={styles.category}>IMDB-ID:</span>{' '}
-                  {details.imdb_id}
+                  {imdb_id ? imdb_id : noInfo}
                 </li>
                 <li>
                   <span className={styles.category}>Birthday:</span>{' '}
-                  {details.birthday}
+                  {birthday ? birthday : noInfo}
                 </li>
                 <li>
                   <span className={styles.category}>Place of birth:</span>{' '}
-                  {details.place_of_birth}
+                  {place_of_birth ? place_of_birth : noInfo}
                 </li>
-                <li>
-                  {details.deathday !== null
-                    ? `Date of death: ${details.deathday}`
-                    : ``}
-                </li>
+                <li>{deathday !== null && `Date of death: ${deathday}`}</li>
                 <li>
                   <span className={styles.category}>
-                    {details.homepage ? (
+                    {homepage && (
                       <span>
                         Personal Website:{' '}
                         <a
                           target='_blank'
                           rel='noopener noreferrer'
-                          href={details.homepage}
+                          href={homepage}
                         >
-                          {details.homepage}
+                          {homepage}
                         </a>
                       </span>
-                    ) : (
-                      ''
                     )}
                   </span>
                 </li>
@@ -74,7 +92,7 @@ export default function DetailsCard(mediaType, details, cast) {
       );
 
     /*
-     *TV Details Card for TV Show
+     *Details Card for TV Show
      */
     case 'tv':
       if (Object.keys(cast).length === 0 || cast === undefined) {
@@ -86,20 +104,20 @@ export default function DetailsCard(mediaType, details, cast) {
               <section className={styles.poster_section}>
                 <img
                   className={styles.poster}
-                  src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${details.poster_path}`}
+                  src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${poster_path}`}
                   alt='poster'
                 />
               </section>
 
               <section className={styles.details_section}>
-                <h2>{details.original_name}</h2>
-                <p className={styles.text}>{details.overview}</p>
+                <h2>{original_name}</h2>
+                <p className={styles.text}>{overview}</p>
                 <ul>
                   <li className='release-date'>
                     <span className={styles.category}>Air time:</span>{' '}
-                    {details.first_air_date} -{' '}
-                    {details.status === 'Ended'
-                      ? `${details.last_air_date} (Ended)`
+                    {first_air_date} -{' '}
+                    {status === 'Ended'
+                      ? `${last_air_date} (Ended)`
                       : 'still in production '}
                   </li>
                   <li>
@@ -107,7 +125,7 @@ export default function DetailsCard(mediaType, details, cast) {
                       <span className={styles.category}>
                         Original language:
                       </span>{' '}
-                      {details.original_language.toUpperCase()}
+                      {original_language.toUpperCase()}
                     </div>
                   </li>
                   <li>
@@ -115,14 +133,14 @@ export default function DetailsCard(mediaType, details, cast) {
                       <span className={styles.category}>
                         Production country:{' '}
                       </span>
-                      {details.origin_country}
+                      {origin_country}
                     </div>
                   </li>
 
                   <li>
                     <div className={styles.companies}>
                       <span className={styles.category}> Networks: </span>
-                      {details.networks.map((i, index) =>
+                      {networks.map((i, index) =>
                         i.logo_path === null ? (
                           <span key={index}>
                             {(index ? ', ' : '') + i.name}
@@ -143,20 +161,18 @@ export default function DetailsCard(mediaType, details, cast) {
                       {' '}
                       <ul className={styles.category}>
                         Seasons:{' '}
-                        {details.seasons.map((i, index) => {
+                        {seasons.map((i, index) => {
                           return (
                             <li
                               key={`episode_${index}`}
                               className={styles.season}
                             >
                               season{' '}
-                              {details.seasons.length > 1
-                                ? i.season_number + 1
-                                : '1'}
-                              : {i.episode_count} episodes (
+                              {seasons.length > 1 ? i.season_number + 1 : '1'}:{' '}
+                              {i.episode_count} episodes (
                               {i.air_date ? i.air_date.slice(0, 4) : noInfo})
-                              {i.season_number === details.seasons.length - 1 ||
-                              details.seasons.length === 1
+                              {i.season_number === seasons.length - 1 ||
+                              seasons.length === 1
                                 ? ` `
                                 : `, `}
                             </li>
@@ -165,29 +181,31 @@ export default function DetailsCard(mediaType, details, cast) {
                       </ul>
                     </div>
                   </li>
+                  <li className={styles.cast}>
+                    {cast
+                      .filter(i => i.order < 10)
+                      .map(i => (
+                        <li className={styles.profile} key={i.id}>
+                          <Link
+                            to={`/overview/person/${i.id}`}
+                            className='details'
+                          >
+                            <img
+                              className={styles.portrait}
+                              src={
+                                i.profile_path
+                                  ? `https://image.tmdb.org/t/p/w300/${i.profile_path}`
+                                  : no_image
+                              }
+                              alt={i.name}
+                            />
+
+                            {i.name}
+                          </Link>
+                        </li>
+                      ))}
+                  </li>
                 </ul>
-              </section>
-
-              <section className={styles.cast}>
-                {cast
-                  .filter(i => i.order < 8)
-                  .map(i => (
-                    <li className={styles.profile} key={i.id}>
-                      <Link to={`/overview/person/${i.id}`} className='details'>
-                        <img
-                          className={styles.portrait}
-                          src={
-                            i.profile_path
-                              ? `https://image.tmdb.org/t/p/w300/${i.profile_path}`
-                              : no_image
-                          }
-                          alt={i.name}
-                        />
-
-                        {i.name}
-                      </Link>
-                    </li>
-                  ))}
               </section>
             </div>
           </React.Fragment>
@@ -195,7 +213,7 @@ export default function DetailsCard(mediaType, details, cast) {
       }
     default:
       /*
-       * DEFAULT: Details Card For A Movie
+       * DEFAULT CASE: Details Card For A Movie
        */
       if (Object.keys(cast).length === 0 || cast === undefined) {
         return <Spinner />;
@@ -206,28 +224,27 @@ export default function DetailsCard(mediaType, details, cast) {
               <section className={styles.poster_section}>
                 <img
                   className={styles.poster}
-                  src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${details.poster_path}`}
+                  src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${poster_path}`}
                   alt='poster'
                 />
               </section>
               <section className={styles.details_section}>
-                <h2>{details.original_title}</h2>
-                <p className={styles.text}>{details.overview}</p>
+                <h2>{original_title}</h2>
+                <p className={styles.text}>{overview}</p>
                 <ul>
                   <li>
-                    <span className={styles.category}>IMDB-ID:</span>{' '}
-                    {details.imdb_id}
+                    <span className={styles.category}>IMDB-ID:</span> {imdb_id}
                   </li>
                   <li className='release-date'>
                     <span className={styles.category}>Release date:</span>{' '}
-                    {details.release_date}
+                    {release_date}
                   </li>
                   <li>
                     <div>
                       <span className={styles.category}>
                         Original language:
                       </span>{' '}
-                      {details.original_language}
+                      {original_language.toUpperCase()}
                     </div>
                   </li>
                   <li>
@@ -235,51 +252,56 @@ export default function DetailsCard(mediaType, details, cast) {
                       <span className={styles.category}>
                         Production countries:{' '}
                       </span>
-                      {details.production_countries.map((i, index) => (
+                      {production_countries.map((i, index) => (
                         <span key={index}>{(index ? ', ' : '') + i.name}</span>
                       ))}
                     </div>
                   </li>
                   <li>
                     <div className={styles.companies}>
-                      <span className={styles.category}> Company: </span>
-                      {details.production_companies.map((i, index) =>
-                        i.logo_path === null ? (
-                          ''
-                        ) : (
-                          <img
-                            className={styles.company_logo}
-                            key={index}
-                            src={`https://image.tmdb.org/t/p/w300/${i.logo_path}`}
-                            alt={i.name}
-                          />
-                        )
-                      )}
+                      <span className={styles.category}>Company:</span>{' '}
+                      {production_companies.length
+                        ? production_companies.map((i, index) =>
+                            i.logo_path === null ? (
+                              ''
+                            ) : (
+                              <img
+                                className={styles.company_logo}
+                                key={index}
+                                src={`https://image.tmdb.org/t/p/w300/${i.logo_path}`}
+                                alt={i.name}
+                              />
+                            )
+                          )
+                        : noInfo}
                     </div>
                   </li>
-                  <li />
-                </ul>
-              </section>
-              <section className={styles.cast}>
-                {cast
-                  .filter(i => i.order < 8)
-                  .map(i => (
-                    <li className={styles.profile} key={i.id}>
-                      <Link to={`/overview/person/${i.id}`} className='details'>
-                        <img
-                          className={styles.portrait}
-                          src={
-                            i.profile_path
-                              ? `https://image.tmdb.org/t/p/w300/${i.profile_path}`
-                              : no_image
-                          }
-                          alt={i.name}
-                        />
+                  <li className={styles.category}>Cast:</li>
+                  <li className={styles.cast}>
+                    {cast
+                      .filter(i => i.order < 10)
+                      .map(i => (
+                        <li className={styles.profile} key={i.id}>
+                          <Link
+                            to={`/overview/person/${i.id}`}
+                            className='details'
+                          >
+                            <img
+                              className={styles.portrait}
+                              src={
+                                i.profile_path
+                                  ? `https://image.tmdb.org/t/p/w300/${i.profile_path}`
+                                  : no_image
+                              }
+                              alt={i.name}
+                            />
 
-                        {i.name}
-                      </Link>
-                    </li>
-                  ))}
+                            {i.name}
+                          </Link>
+                        </li>
+                      ))}
+                  </li>
+                </ul>
               </section>
             </div>
           </React.Fragment>
