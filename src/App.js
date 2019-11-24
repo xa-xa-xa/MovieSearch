@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import Navbar from './components/layout/Navbar';
-import Index from './components/layout/Index';
-import DetailsPage from './components/movies/DetailsPage';
+import Navbar from './components/layout/Navbar/Navbar';
+import Index from './components/layout/Index/Index';
+import Details from './components/movies/Details';
 import Search from './components/movies/Search';
 
 import { Provider } from './context';
@@ -23,7 +23,7 @@ function App() {
               <Route
                 exact
                 path='/overview/:mediaType/:id'
-                component={DetailsPage}
+                component={Details}
               />
             </Switch>
           </div>

@@ -1,12 +1,12 @@
 import React, { Fragment } from 'react';
-import Movies from '../movies/Movies';
-import Search from '../movies/Search';
+import HomePage from '../../pages/home/HomePage';
+import Search from '../../movies/Search';
 
 export default function Index() {
   return (
     <Fragment>
       <Search />
-      <Movies />
+      <HomePage />
     </Fragment>
   );
 }

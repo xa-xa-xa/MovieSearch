@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './detailsCardStyles.module.scss';
+import styles from './detailsPage.module.scss';
 import { Link } from 'react-router-dom';
-import Spinner from '../layout/Spinner';
+import Spinner from '../../layout/Spinner/Spinner';
 
 const no_image = '/images/no_image.png';
 

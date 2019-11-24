@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Consumer } from '../../context';
-import Card from '../movies/Card';
-import Spinner from '../layout/Spinner';
-import styles from './movies.module.scss';
+import { Consumer } from '../../../context';
+import Card from '../../layout/Card/Card';
+import Spinner from '../../layout/Spinner/Spinner';
+import styles from './homePage.module.scss';
 
 export default class Movies extends Component {
   render() {

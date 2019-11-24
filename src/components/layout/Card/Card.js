@@ -9,8 +9,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './card.module.scss';
-import LikeIcon from '../actions/LikeIcon';
-import SaveIcon from '../actions/SaveIcon';
+import LikeIcon from '../../actions/LikeIcon';
+import SaveIcon from '../../actions/SaveIcon';
 // import SaveIcon from '../actions/SaveIcon';
 
 // import styles from "./movie.module.scss";

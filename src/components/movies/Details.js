@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Spinner from '../layout/Spinner';
+import Spinner from '../layout/Spinner/Spinner';
 
-import styles from './detailsPageStyles.module.scss';
-import DetailsCard from './DetailsCard';
+import styles from './details.module.scss';
+import DetailsPage from '../pages/details/DetailsPage';
 
 const language = 'en-US';
 
-export default class DetailsPage extends Component {
+export default class Details extends Component {
   state = {
     id: {},
     mediaType: {},
@@ -64,7 +64,7 @@ export default class DetailsPage extends Component {
         <React.Fragment>
           <div className={styles.backdrop} style={backdropImage} />
           <div className={styles.details_card}>
-            {DetailsCard(mediaType, details, cast)}
+            {DetailsPage(mediaType, details, cast)}
           </div>
         </React.Fragment>
       );
