@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './detailsPage.module.scss';
 import { Link } from 'react-router-dom';
 import Spinner from '../../layout/Spinner/Spinner';
 
 const no_image = '/images/no_image.png';
 
-export default function DetailsCard(mediaType, details, cast) {
+export default function DetailsPage(mediaType, details, cast) {
+  let expanded = false;
+  const [z, setZ] = useState(false);
+  const expandAccordion = e => {
+    e.preventDefault();
+    console.log(expanded);
+    return (expanded = !expanded);
+  };
+
+  const castQty = expanded ? 20 : 5;
+
   const noInfo = ` Sorry, no info available at this time`;
   const {
     name,
@@ -31,6 +41,7 @@ export default function DetailsCard(mediaType, details, cast) {
     networks,
     seasons
   } = details;
+  console.log(expanded);
 
   switch (mediaType) {
     /*
@@ -157,28 +168,26 @@ export default function DetailsCard(mediaType, details, cast) {
                     </div>
                   </li>
                   <li>
-                    <div>
+                    <div className={styles.category}>
                       {' '}
-                      <ul className={styles.category}>
-                        Seasons:{' '}
-                        {seasons.map((i, index) => {
-                          return (
-                            <li
-                              key={`episode_${index}`}
-                              className={styles.season}
-                            >
-                              season{' '}
-                              {seasons.length > 1 ? i.season_number + 1 : '1'}:{' '}
-                              {i.episode_count} episodes (
-                              {i.air_date ? i.air_date.slice(0, 4) : noInfo})
-                              {i.season_number === seasons.length - 1 ||
-                              seasons.length === 1
-                                ? ` `
-                                : `, `}
-                            </li>
-                          );
-                        })}
-                      </ul>
+                      Seasons:{' '}
+                      {seasons.map((i, index) => {
+                        return (
+                          <span
+                            key={`episode_${index}`}
+                            className={styles.season}
+                          >
+                            season{' '}
+                            {seasons.length > 1 ? i.season_number + 1 : '1'}:{' '}
+                            {i.episode_count} episodes (
+                            {i.air_date ? i.air_date.slice(0, 4) : noInfo})
+                            {i.season_number === seasons.length - 1 ||
+                            seasons.length === 1
+                              ? `. `
+                              : `, `}
+                          </span>
+                        );
+                      })}
                     </div>
                   </li>
                   <li className={styles.cast}>
@@ -279,7 +288,7 @@ export default function DetailsCard(mediaType, details, cast) {
                   <li className={styles.category}>Cast:</li>
                   <li className={styles.cast}>
                     {cast
-                      .filter(i => i.order < 10)
+                      .filter(i => i.order < castQty)
                       .map(i => (
                         <li className={styles.profile} key={i.id}>
                           <Link
@@ -300,6 +309,7 @@ export default function DetailsCard(mediaType, details, cast) {
                           </Link>
                         </li>
                       ))}
+                    <button onClick={expandAccordion}>+</button>
                   </li>
                 </ul>
               </section>
