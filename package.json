@@ -4,8 +4,8 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "npm": "6.4.1",
-    "node": "10.15.3"
+    "npm": "6.x",
+    "node": "10.x"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.19",
@@ -37,7 +37,7 @@
     "eject": "react-scripts eject",
     "deploy": "",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=true npm install --prefix client && npm run build --prefix client"
   },
   "eslintConfig": {
     "extends": "react-app"
