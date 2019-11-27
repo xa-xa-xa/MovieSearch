@@ -36,8 +36,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "",
-    "analyze": "source-map-explorer 'build/static/js/*.js'",
-    // "heroku-postbuild": "NPM_CONFIG_PRODUCTION=true npm install --prefix client && npm run build --prefix client"
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "eslintConfig": {
     "extends": "react-app"
