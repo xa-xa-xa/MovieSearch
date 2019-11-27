@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import axios from 'axios';
 import Spinner from '../layout/Spinner/Spinner';
 
@@ -11,63 +12,74 @@ const Details = props => {
   const { mediaType, id } = props.match.params;
 
   const initialState = {
-    id: id,
-    mediaType: mediaType,
+    id: null,
+    mediaType: '',
     details: {},
-    cast: {}
+    cast: {},
+    backdrop_path: ''
   };
+
   const [media, setMedia] = useState(initialState);
+  const history = props.location.pathname;
 
-  const fetchData = async (mediaType, id) => {
-    console.log(mediaType, id);
-    await axios
-      .get(
-        `https://api.themoviedb.org/3/${mediaType}/${id}?api_key=${process.env.REACT_APP_MS_KEY}&language=${language}`
-      )
-      .then(res => {
-        setMedia(initialState => ({
-          ...initialState,
-          details: res.data
-        }));
+  const fetchData = (mediaType, id) => {
+    try {
+      axios
+        .get(
+          `https://api.themoviedb.org/3/${mediaType}/${id}?api_key=${process.env.REACT_APP_MS_KEY}&language=${language}`
+        )
+        .then(async res => {
+          setMedia(initialState => ({
+            ...initialState,
+            details: res.data,
+            backdrop_path: res.data.backdrop_path,
+            id: id,
+            mediaType: mediaType
+          }));
 
-        if (mediaType !== 'person') {
-          return axios
-            .get(
-              `https://api.themoviedb.org/3/${mediaType}/${id}/credits?api_key=${process.env.REACT_APP_MS_KEY}`
-            )
-            .then(res => {
-              setMedia(initialState => ({
-                ...initialState,
-                cast: res.data.cast
-              }));
-            });
-        }
-      })
-      .catch(err => console.error('! ERROR from .catch() -->', err));
+          if (mediaType !== 'person') {
+            axios
+              .get(
+                `https://api.themoviedb.org/3/${mediaType}/${id}/credits?api_key=${process.env.REACT_APP_MS_KEY}`
+              )
+              .then(async res => {
+                setMedia(media => ({
+                  ...media,
+                  cast: res.data.cast
+                }));
+              });
+          }
+        });
+    } catch (err) {
+      console.error('! ERROR from .catch() -->', err);
+    }
   };
 
   useEffect(() => {
     fetchData(mediaType, id);
+    return () => {
+      setMedia(initialState);
+    };
     // eslint-disable-next-line
-  }, []);
+  }, [mediaType, id]);
 
-  const { details, cast } = media;
+  // const { details, cast, backdrop_path } = media;
 
-  let backdropImage;
-  details.backdrop_path
-    ? (backdropImage = {
-        backgroundImage: `url(https://image.tmdb.org/t/p/w600_and_h900_bestv2/${details.backdrop_path})`
-      })
-    : (backdropImage = { backgroundImage: '' });
-
-  if (details === undefined || Object.keys(details).length === 0) {
+  if (media.details === undefined || Object.keys(media.details).length === 0) {
     return <Spinner />;
   } else {
     return (
       <React.Fragment>
-        <div className={styles.backdrop} style={backdropImage} />
+        {media.backdrop_path && (
+          <div
+            className={styles.backdrop}
+            style={{
+              backgroundImage: `url(https://image.tmdb.org/t/p/w600_and_h900_bestv2/${media.backdrop_path}`
+            }}
+          />
+        )}
         <div className={styles.details_card}>
-          {DetailsPage(mediaType, details, cast)}
+          {DetailsPage(mediaType, media.details, media.cast)}
         </div>
       </React.Fragment>
     );
