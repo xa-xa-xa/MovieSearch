@@ -91,6 +91,18 @@ section.details_section {
   }
 }
 
+//
+.cast_expand {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  color: blue;
+  font-size: 1.25rem;
+}
+
 // Mobile
 @media screen and (max-width: 35em) {
   .container {

@@ -1,20 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './detailsPage.module.scss';
 import { Link } from 'react-router-dom';
 import Spinner from '../../layout/Spinner/Spinner';
 
 const no_image = '/images/no_image.png';
 
-export default function DetailsPage(mediaType, details, cast) {
-  let expanded = false;
-  const [z, setZ] = useState(false);
-  const expandAccordion = e => {
-    e.preventDefault();
-    console.log(expanded);
-    return (expanded = !expanded);
-  };
-
-  const castQty = expanded ? 20 : 5;
+const DetailsPage = (mediaType, details, cast) => {
+  const castQty = 10;
 
   const noInfo = ` Sorry, no info available at this time`;
   const {
@@ -41,7 +33,6 @@ export default function DetailsPage(mediaType, details, cast) {
     networks,
     seasons
   } = details;
-  console.log(expanded);
 
   switch (mediaType) {
     /*
@@ -290,7 +281,7 @@ export default function DetailsPage(mediaType, details, cast) {
                     {cast
                       .filter(i => i.order < castQty)
                       .map(i => (
-                        <li className={styles.profile} key={i.id}>
+                        <span className={styles.profile} key={i.id}>
                           <Link
                             to={`/overview/person/${i.id}`}
                             className='details'
@@ -307,9 +298,15 @@ export default function DetailsPage(mediaType, details, cast) {
 
                             {i.name}
                           </Link>
-                        </li>
+                        </span>
                       ))}
-                    <button onClick={expandAccordion}>+</button>
+
+                    <button
+                      className={styles.cast_expand}
+                      onClick={() => console.log('CLICKED!')}
+                    >
+                      +
+                    </button>
                   </li>
                 </ul>
               </section>
@@ -318,4 +315,6 @@ export default function DetailsPage(mediaType, details, cast) {
         );
       }
   }
-}
+};
+
+export default DetailsPage;
