@@ -9,9 +9,9 @@ export default function Navbar() {
         <h1>
           <Link to='/'>Awesome Movie Search </Link>
         </h1>
-        <p>
+        <h5>
           <Link to='/'>Fast search for any movie, tv show, or etc</Link>
-        </p>
+        </h5>
       </div>
     </nav>
   );
