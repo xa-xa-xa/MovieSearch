@@ -20,7 +20,6 @@ const Details = props => {
   };
 
   const [media, setMedia] = useState(initialState);
-  const history = props.location.pathname;
 
   const fetchData = (mediaType, id) => {
     try {
