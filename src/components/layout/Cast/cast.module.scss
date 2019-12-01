@@ -1,0 +1,85 @@
+@import '../../../App.scss';
+
+a {
+  color: $main-text-color-dark;
+}
+h2 {
+  text-align: center;
+}
+
+// cast section
+.cast {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  .profile {
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    width: 75px;
+    margin: 5px;
+    background-color: #fff;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.105);
+    border: 1px solid $main-text-color-light;
+    border-radius: 8px 8px 0 0;
+
+    a {
+      text-align: center;
+      &:hover {
+        color: $primary-color;
+      }
+    }
+    img {
+      width: 100%;
+    }
+  }
+}
+
+//
+.cast_expand {
+  display: flex;
+  justify-content: center;
+  height: 30px;
+  width: 30px;
+  align-self: center;
+  border-radius: 50%;
+  color: $primary-color;
+  font-size: 1.25rem;
+  cursor: pointer;
+  border: $primary-color 2px solid;
+}
+// Mobile
+@media screen and (max-width: 35em) {
+  .cast {
+    margin-top: 1rem;
+    margin-bottom: 6rem;
+    a {
+      font-size: 0.7rem;
+    }
+  }
+}
+
+// Tablet
+@media screen and (min-width: 35em) {
+  .cast {
+    width: 100%;
+    & .profile {
+      width: 55px;
+      a {
+        font-size: 0.65rem;
+      }
+    }
+  }
+}
+
+//Desktop
+@media screen and (min-width: 65em) {
+  .cast {
+    & .profile {
+      width: 75px;
+      a {
+        font-size: 0.75rem;
+      }
+    }
+  }
+}

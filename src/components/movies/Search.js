@@ -63,8 +63,7 @@ export default class Search extends Component {
               {' '}
               <form
                 className={styles.search_box}
-                onSubmit={this.search.bind(this, dispatch)}
-              >
+                onSubmit={this.search.bind(this, dispatch)}>
                 <input
                   className={styles.search_text}
                   type='text'
@@ -77,8 +76,7 @@ export default class Search extends Component {
                   alt='search'
                   type='submit'
                   href='/'
-                  className={styles.search_btn}
-                >
+                  className={styles.search_btn}>
                   <FontAwesomeIcon icon={faSearch} />
                 </button>
               </form>

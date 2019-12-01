@@ -37,7 +37,7 @@ const SaveIcon = props => {
       onClick={() => HandleClick()}
       icon={saveStatus ? faBookmark : farBookmark}
       style={{ cursor: 'pointer' }}
-    ></FontAwesomeIcon>
+    />
   );
 };
 

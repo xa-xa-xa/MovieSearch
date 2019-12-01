@@ -1,14 +1,13 @@
 import React from 'react';
 import styles from './detailsPage.module.scss';
-import { Link } from 'react-router-dom';
 import Spinner from '../../layout/Spinner/Spinner';
-
-const no_image = '/images/no_image.png';
+import Cast from '../../layout/Cast/Cast';
 
 const DetailsPage = (mediaType, details, cast) => {
-  const castQty = 10;
-
   const noInfo = ` Sorry, no info available at this time`;
+  const no_image =
+    mediaType === 'movie' ? '/images/no_poster.jpg' : '/images/no_image.png';
+
   const {
     name,
     biography,
@@ -33,6 +32,8 @@ const DetailsPage = (mediaType, details, cast) => {
     networks,
     seasons
   } = details;
+
+  // const [expanded, setExpanded] = useState(false);
 
   switch (mediaType) {
     /*
@@ -78,8 +79,7 @@ const DetailsPage = (mediaType, details, cast) => {
                         <a
                           target='_blank'
                           rel='noopener noreferrer'
-                          href={homepage}
-                        >
+                          href={homepage}>
                           {homepage}
                         </a>
                       </span>
@@ -106,7 +106,11 @@ const DetailsPage = (mediaType, details, cast) => {
               <section className={styles.poster_section}>
                 <img
                   className={styles.poster}
-                  src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${poster_path}`}
+                  src={
+                    poster_path
+                      ? `https://image.tmdb.org/t/p/w600_and_h900_bestv2/${poster_path}`
+                      : no_image
+                  }
                   alt='poster'
                 />
               </section>
@@ -166,8 +170,7 @@ const DetailsPage = (mediaType, details, cast) => {
                         return (
                           <span
                             key={`episode_${index}`}
-                            className={styles.season}
-                          >
+                            className={styles.season}>
                             season{' '}
                             {seasons.length > 1 ? i.season_number + 1 : '1'}:{' '}
                             {i.episode_count} episodes (
@@ -181,29 +184,8 @@ const DetailsPage = (mediaType, details, cast) => {
                       })}
                     </div>
                   </li>
-                  <li className={styles.cast}>
-                    {cast
-                      .filter(i => i.order < 10)
-                      .map(i => (
-                        <li className={styles.profile} key={i.id}>
-                          <Link
-                            to={`/overview/person/${i.id}`}
-                            className='details'
-                          >
-                            <img
-                              className={styles.portrait}
-                              src={
-                                i.profile_path
-                                  ? `https://image.tmdb.org/t/p/w300/${i.profile_path}`
-                                  : no_image
-                              }
-                              alt={i.name}
-                            />
-
-                            {i.name}
-                          </Link>
-                        </li>
-                      ))}
+                  <li>
+                    <Cast cast={cast} />
                   </li>
                 </ul>
               </section>
@@ -215,7 +197,13 @@ const DetailsPage = (mediaType, details, cast) => {
       /*
        * DEFAULT CASE: Details Card For A Movie
        */
-      if (Object.keys(cast).length === 0 || cast === undefined) {
+      if (Object.keys(details).length === 0 || cast === undefined) {
+        console.log('TCL: DetailsPage -> cast', cast);
+        console.log(
+          'TCL: DetailsPage -> Object.keys(cast).length',
+          Object.keys(cast).length
+        );
+
         return <Spinner />;
       } else {
         return (
@@ -224,7 +212,11 @@ const DetailsPage = (mediaType, details, cast) => {
               <section className={styles.poster_section}>
                 <img
                   className={styles.poster}
-                  src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${poster_path}`}
+                  src={
+                    poster_path
+                      ? `https://image.tmdb.org/t/p/w600_and_h900_bestv2/${poster_path}`
+                      : no_image
+                  }
                   alt='poster'
                 />
               </section>
@@ -277,36 +269,8 @@ const DetailsPage = (mediaType, details, cast) => {
                     </div>
                   </li>
                   <li className={styles.category}>Cast:</li>
-                  <li className={styles.cast}>
-                    {cast
-                      .filter(i => i.order < castQty)
-                      .map(i => (
-                        <span className={styles.profile} key={i.id}>
-                          <Link
-                            to={`/overview/person/${i.id}`}
-                            className='details'
-                          >
-                            <img
-                              className={styles.portrait}
-                              src={
-                                i.profile_path
-                                  ? `https://image.tmdb.org/t/p/w300/${i.profile_path}`
-                                  : no_image
-                              }
-                              alt={i.name}
-                            />
-
-                            {i.name}
-                          </Link>
-                        </span>
-                      ))}
-
-                    <button
-                      className={styles.cast_expand}
-                      onClick={() => console.log('CLICKED!')}
-                    >
-                      +
-                    </button>
+                  <li>
+                    <Cast cast={cast} />
                   </li>
                 </ul>
               </section>

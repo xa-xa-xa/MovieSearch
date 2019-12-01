@@ -9,39 +9,38 @@ import DetailsPage from '../pages/details/DetailsPage';
 const language = 'en-US';
 
 const Details = props => {
-  const { mediaType, id } = props.match.params;
+  const { id, mediaType } = props.match.params;
 
-  const initialState = {
+  let initialState = {
     id: null,
-    mediaType: '',
+    type: '',
     details: {},
     cast: {},
     backdrop_path: ''
   };
-
   const [media, setMedia] = useState(initialState);
 
-  const fetchData = (mediaType, id) => {
+  const fetchData = async (mediaType, id) => {
     try {
-      axios
+      await axios
         .get(
           `https://api.themoviedb.org/3/${mediaType}/${id}?api_key=${process.env.REACT_APP_MS_KEY}&language=${language}`
         )
-        .then(async res => {
-          setMedia(initialState => ({
+        .then(res => {
+          setMedia({
             ...initialState,
-            details: res.data,
-            backdrop_path: res.data.backdrop_path,
             id: id,
-            mediaType: mediaType
-          }));
+            type: mediaType,
+            details: res.data,
+            backdrop_path: res.data.backdrop_path
+          });
 
           if (mediaType !== 'person') {
             axios
               .get(
                 `https://api.themoviedb.org/3/${mediaType}/${id}/credits?api_key=${process.env.REACT_APP_MS_KEY}`
               )
-              .then(async res => {
+              .then(res => {
                 setMedia(media => ({
                   ...media,
                   cast: res.data.cast
@@ -60,16 +59,16 @@ const Details = props => {
       setMedia(initialState);
     };
     // eslint-disable-next-line
-  }, [mediaType, id]);
+  }, [props.match.params]);
 
-  // const { details, cast, backdrop_path } = media;
+  const { details, cast, backdrop_path, type } = media;
 
-  if (media.details === undefined || Object.keys(media.details).length === 0) {
+  if (details === undefined || Object.keys(details).length === 0) {
     return <Spinner />;
   } else {
     return (
       <React.Fragment>
-        {media.backdrop_path && (
+        {backdrop_path && (
           <div
             className={styles.backdrop}
             style={{
@@ -78,7 +77,7 @@ const Details = props => {
           />
         )}
         <div className={styles.details_card}>
-          {DetailsPage(mediaType, media.details, media.cast)}
+          {DetailsPage(type, details, cast)}
         </div>
       </React.Fragment>
     );
