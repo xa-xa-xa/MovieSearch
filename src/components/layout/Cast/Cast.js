@@ -37,12 +37,12 @@ const Cast = ({ cast }) => {
               </Link>
             </li>
           ))}
-        <button className={styles.cast_expand}>
+        <div className={styles.cast_expand}>
           <FontAwesomeIcon
             onClick={() => setIsExpanded(!isExpanded)}
-            icon={isExpanded ? faChevronUp : faChevronDown}
-            style={{ cursor: 'pointer' }}></FontAwesomeIcon>
-        </button>
+            className={styles.chevron_icon}
+            icon={isExpanded ? faChevronUp : faChevronDown}></FontAwesomeIcon>
+        </div>
       </ul>
     );
   }
