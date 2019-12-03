@@ -10,7 +10,6 @@ export default class Movies extends Component {
       <Consumer>
         {value => {
           const { query_results, heading, query, error } = value;
-          console.log('value: ', value, error);
           const searchResult = query.length ? query : error;
 
           if (query_results === undefined || query_results.length === 0) {
