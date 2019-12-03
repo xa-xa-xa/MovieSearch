@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Consumer } from '../../../context';
 import Card from '../../layout/Card/Card';
 import Spinner from '../../layout/Spinner/Spinner';
@@ -9,13 +9,26 @@ export default class Movies extends Component {
     return (
       <Consumer>
         {value => {
-          const { query_results, heading, query } = value;
-          const searchResult = query.length === 0 ? '' : query;
+          const { query_results, heading, query, error } = value;
+          console.log('value: ', value, error);
+          const searchResult = query.length ? query : error;
+
           if (query_results === undefined || query_results.length === 0) {
+            if (error === 'SEARCH_NO_MATCH') {
+              return (
+                <Fragment>
+                  <h3 className={styles.error_msg}>
+                    Sorry, nothing been found for{' '}
+                    <span className={styles.query}>'{query}'</span>, please
+                    check you spelling or try to search for something else...
+                  </h3>
+                </Fragment>
+              );
+            }
             return <Spinner />;
           } else {
             return (
-              <>
+              <Fragment>
                 <div>
                   <h3 className={styles.header}>
                     {heading}
@@ -27,7 +40,7 @@ export default class Movies extends Component {
                     ))}
                   </div>
                 </div>
-              </>
+              </Fragment>
             );
           }
         }}

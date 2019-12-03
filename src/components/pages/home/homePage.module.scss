@@ -1,9 +1,18 @@
 @import '../../../App.scss';
+
 .header {
   position: relative;
   @include navbar_height('margin-top');
 }
 
 .query {
-  color: $secondary-text;
+  color: $primary-color;
+}
+
+.error_msg {
+  margin-top: 45vh;
+  color: $main-text-color-dark;
+  span {
+    color: red;
+  }
 }

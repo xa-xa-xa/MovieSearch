@@ -9,7 +9,8 @@ const reducer = (state, action) => {
         ...state,
         query_results: action.payload.data,
         heading: 'Search results for: ',
-        query: action.payload.query
+        query: action.payload.query,
+        error: action.payload.error
       };
     default:
       return state;
@@ -30,6 +31,7 @@ export class Provider extends Component {
     query_results: [],
     heading: 'Top 20 Movies',
     query: '',
+    error: false,
     dispatch: action => this.setState(state => reducer(state, action))
   };
 
@@ -38,10 +40,8 @@ export class Provider extends Component {
       .get(
         `${baseUrl}movie/popular?api_key=${process.env.REACT_APP_MS_KEY}&language=${this.state.language}&page=1`
       )
-      .then(result => {
-        this.setState({ query_results: result.data.results });
-      })
-      .catch(err => console.error(err.response));
+      .then(res => this.setState({ query_results: res.data.results }))
+      .catch(err => console.er(err.response));
   }
 
   render() {

@@ -12,7 +12,7 @@ const baseUrl = `https://api.themoviedb.org/3/`;
 
 export default class Search extends Component {
   state = {
-    movieTitle: '',
+    searchQuery: '',
     redirect: false
   };
   search = (dispatch, e) => {
@@ -20,16 +20,26 @@ export default class Search extends Component {
 
     axios
       .get(
-        `${baseUrl}search/multi?api_key=${process.env.REACT_APP_MS_KEY}&language=en-US&query=${this.state.movieTitle}&page=1&include_adult=false`
+        `${baseUrl}search/multi?api_key=${process.env.REACT_APP_MS_KEY}&language=en-US&query=${this.state.searchQuery}&page=1&include_adult=false`
       )
       .then(res => {
-        dispatch({
-          type: 'SEARCH',
-          payload: {
-            data: res.data.results,
-            query: this.state.movieTitle
-          }
-        });
+        if (res.data.results.length === 0) {
+          dispatch({
+            type: 'SEARCH',
+            payload: {
+              error: 'SEARCH_NO_MATCH',
+              query: this.state.searchQuery
+            }
+          });
+        } else {
+          dispatch({
+            type: 'SEARCH',
+            payload: {
+              data: res.data.results,
+              query: this.state.searchQuery
+            }
+          });
+        }
       })
       .then(() => {
         this.setState({ redirect: true });
@@ -67,9 +77,9 @@ export default class Search extends Component {
                 <input
                   className={styles.search_text}
                   type='text'
-                  placeholder='enter movie, show, or name'
-                  name='movieTitle'
-                  value={this.state.movieTitle}
+                  placeholder='Enter movie, TV show, or name...'
+                  name='searchQuery'
+                  value={this.state.searchQuery}
                   onChange={this.onChange}
                 />
                 <button
