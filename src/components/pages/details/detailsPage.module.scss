@@ -24,7 +24,6 @@ img {
   flex-wrap: wrap;
   position: relative;
   @include navbar_height('top');
-  // @include navbar_height(height, #{'100vh - #{navbar_height}'});
 }
 p,
 h2,

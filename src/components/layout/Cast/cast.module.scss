@@ -8,11 +8,11 @@ h2 {
 }
 
 // cast section
+
 .cast {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
-
+  justify-content: space-evenly;
   .profile {
     display: flex;
     flex-direction: column;
@@ -26,7 +26,6 @@ h2 {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.105);
     border: 1px solid $main-text-color-light;
     border-radius: 8px 8px 0 0;
-
     a {
       text-align: center;
       &:hover {
@@ -45,9 +44,10 @@ h2 {
   justify-content: center;
   height: 30px;
   width: 30px;
-  align-self: center;
+  margin-right: calc(50% - 15px);
+  margin-left: auto;
+  margin-top: 0.5rem;
   border-radius: 50%;
-  color: $primary-color;
   font-size: 1.25rem;
   overflow: hidden;
   cursor: pointer;
@@ -66,6 +66,9 @@ h2 {
     a {
       font-size: 0.7rem;
     }
+  }
+  .cast_expand {
+    margin-top: -5rem;
   }
 }
 
@@ -92,4 +95,19 @@ h2 {
       }
     }
   }
+}
+
+:global(.item-enter) {
+  opacity: 0;
+}
+:global(.item-enter-done) {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+:global(.item-exit) {
+  opacity: 1;
+}
+:global(.item-exit-active) {
+  opacity: 0;
+  transition: opacity 300ms ease-in;
 }
