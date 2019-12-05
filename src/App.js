@@ -13,7 +13,7 @@ import './App.scss';
 function App() {
   return (
     <Provider>
-      <Router>
+      <Router basename={'/movie-search'}>
         <Fragment>
           <Navbar />
           <Search />
